@@ -2,4 +2,4 @@
 
 #Este repositorio almacenará distintas versiones de items de configuracion del proyecto final del grupo Observer.
 
-.- Mayo de 2018 .-
+.- Junio de 2018 .-
