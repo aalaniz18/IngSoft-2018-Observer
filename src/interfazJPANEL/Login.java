@@ -5,6 +5,11 @@
  */
 package interfazJPANEL;
 
+import Database.Conectar;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,6 +58,7 @@ private String Pass;
             }
         });
 
+        jTextField1.setMaximumSize(new java.awt.Dimension(500, 500));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -79,7 +85,7 @@ private String Pass;
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPasswordField1)
-                    .addComponent(jTextField1))
+                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -139,10 +145,28 @@ home.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                this.User=jTextField1.getText().toLowerCase();
-                this.Pass=jPasswordField1.getText().toLowerCase();
+                this.User=jTextField1.getText().toLowerCase().trim();
+                this.Pass=jPasswordField1.getText().toLowerCase().trim();
         if((User.equalsIgnoreCase("admin")==true) && (Pass.equalsIgnoreCase("admin")==true)){
-                
+      
+                                
+            /*
+            Conectar cnx = new Conectar();
+                         if(cnx == null){
+                                   JOptionPane.showMessageDialog(null, "No conectado al sistema");
+           }
+           else {
+                                   JOptionPane.showMessageDialog(null, "conectado al sistema");
+           }
+            
+            */
+            
+            
+            
+            
+            
+            
+            
                     this.setVisible(false);
                     CargaStock cs = new CargaStock();
                     cs.setVisible(true);
