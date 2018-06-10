@@ -1,9 +1,30 @@
+import java.util.HashMap;
+
 public class Cargador {
-	Compra c;
+	//Compra c;
+	private BaseDeDatos bd;
 	
 	public Cargador(){
+		bd= new BaseDeDatos();
 	}
 	
+	public boolean validarAdmin(String usua, String pass){ // hacer test, muy facil
+		HashMap<String,String> m=bd.getMapAdmin();
+		if(m.containsKey(usua)){
+			if(pass==m.get(usua)){
+				return true;}
+			else
+				return false;
+			}
+		else
+			return false;
+	}
+	
+	public BaseDeDatos getBase(){
+		return bd;
+	}
+	
+	/*
 	public void iniciaCompra(){
 		Compra c1= new Compra();
 	}
@@ -21,6 +42,6 @@ public class Cargador {
 		c.startValido();
 		//falta resumen
 	}
-
+*/
 	
 }

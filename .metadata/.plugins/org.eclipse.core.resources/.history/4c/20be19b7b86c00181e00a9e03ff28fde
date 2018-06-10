@@ -1,0 +1,13 @@
+import java.util.AbstractMap;
+import java.util.HashMap;
+
+public class BaseDeDatos {
+	HashMap<String,Administrador> admin;
+	HashMap<String,Empleado> empleado;
+	
+	public BaseDeDatos(){
+	admin= new HashMap<String, Administrador>(1);
+	empleado= new HashMap<String,Empleado>();
+	}
+	
+}
