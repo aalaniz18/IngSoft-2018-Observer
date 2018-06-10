@@ -24,6 +24,10 @@ public class Cargador {
 		return bd;
 	}
 	
+	public int[] listarLibres(int id) // no esta terminada, cuando vuelva la sigo
+	
+	
+	
 	/*
 	public void iniciaCompra(){
 		Compra c1= new Compra();
