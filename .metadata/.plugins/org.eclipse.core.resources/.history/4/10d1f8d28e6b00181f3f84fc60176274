@@ -1,0 +1,31 @@
+
+public class Compra {
+	
+	Producto p;
+	Producto p1;
+	Producto p2;
+	double total;
+	FormaPago f;
+	Codigo c;
+	
+	public Compra(){
+		total= 0.0;
+	}
+	
+	/* El parametro i es el orden de casillero elegido por el usuario. Supongo primero a Entrada
+	 * segundo a Comida y tercero a Merchandising. */
+	public void setProducto(int i){
+		if(i==1){
+			p= new Entrada();
+		}
+		if(i==2){
+			p= new Comida();
+		}
+		else
+			p= new Merchandising();
+	}
+	
+	public void genCodigo(){
+	}
+
+}

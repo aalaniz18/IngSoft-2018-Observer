@@ -1,0 +1,43 @@
+import java.util.ArrayList;
+import java.util.Calendar;
+
+public class Compra {
+	
+	private Producto p;
+	private ArrayList<Producto> lista;
+	private double total;
+	private FormaPago f;
+	private Codigo c;
+	
+	public Compra(){
+		total= 0.0;
+		lista = new ArrayList<Producto>();
+		c=new Codigo("0");
+	}
+	
+	/* El parametro i es el orden de casillero elegido por el usuario. Supongo primero a Entrada
+	 * segundo a Comida y tercero a Merchandising. */
+	public void agregarProducto(int i){
+		if(i==1){
+			lista.add(new Entrada());
+		}
+		if(i==2||i==3){
+			lista.add(new Producto());
+		}
+	}
+	
+	public void setCodigo(String a){
+		c.setCode(a);
+	}
+	
+	public String getCod(){
+		return c.getCode();
+	}
+	
+	public String getTime(){
+		return c.getInicio();
+	}
+	
+	
+
+}

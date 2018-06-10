@@ -1,0 +1,13 @@
+
+public class Entrada extends Producto{
+	String pelicula;
+	String ubicacion;
+	
+	public Entrada(){
+		super();
+	}
+	
+	
+	
+
+}

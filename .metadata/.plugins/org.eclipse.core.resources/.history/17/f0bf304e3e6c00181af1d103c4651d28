@@ -1,0 +1,7 @@
+
+public class Efectivo implements FormaPago{
+	public double pagar(){
+		System.out.println("Estoy pagando en efectivo");
+	}
+
+}

@@ -1,0 +1,22 @@
+public class Cargador {
+	Compra c;
+	
+	public Cargador(){
+	}
+	
+	public void creaCompra(){
+		Compra c1= new Compra();
+	}
+	
+	public void crearCode(Compra c){
+		Generador g= new Generador();
+		c.setCodigo(g.creaPass());
+	}
+	
+	public void finCompra(Compra c){
+		c.startValido();
+		//falta resumen
+	}
+
+	
+}

@@ -1,0 +1,28 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Codigo {
+	private String code;
+	private Calendar inicial;
+	
+	public Codigo(String code){
+		this.code=code;
+	}
+	
+	public void setCode(String s){
+		code=s;
+	}
+
+	public String getCode(){
+		return code;
+	}
+	
+	public void setInicio(){
+		inicial= new GregorianCalendar();
+	}
+	
+	public Calendar getInicio(){
+		return inicial;
+	}
+	
+}

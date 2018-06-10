@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move 4 elements to &apos;interfazJPANEL/interfazJPANEL&apos;&#x0A;- Original project: &apos;interfazJPANEL&apos;&#x0A;- Destination element: &apos;interfazJPANEL/interfazJPANEL&apos;&#x0A;- Original elements:&#x0A;     Login.java&#x0A;     CargaStock.java&#x0A;     Home.java&#x0A;     MessageDialog.java&#x0A;- Update references to refactored element" description="Move compilation units" destination="/&lt;interfazJPANEL" element1="/&lt;{Login.java" element2="/&lt;{CargaStock.java" element3="/&lt;{Home.java" element4="/&lt;{MessageDialog.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1528504785733" units="4" version="1.0"/>
+</session>

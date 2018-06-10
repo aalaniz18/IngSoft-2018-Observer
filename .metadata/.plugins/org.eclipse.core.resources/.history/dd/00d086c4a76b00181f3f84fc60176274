@@ -1,0 +1,9 @@
+
+public class Codigo {
+	String code;
+	
+	public Codigo(String code){
+		this.code=code;
+	}
+	
+}

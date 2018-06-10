@@ -1,0 +1,32 @@
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
+public class Codigo {
+	private String code;
+	private int min;
+	private int hor;
+	
+	public Codigo(String code){
+		this.code=code;
+	}
+	
+	public void setCode(String s){
+		code=s;
+	}
+
+	public String getCode(){
+		return code;
+	}
+	
+	public void setInicio(){
+		Calendar inicial= new GregorianCalendar();
+		min= inicial.get(Calendar.MINUTE);
+		hor= inicial.get(Calendar.HOUR);
+	}
+	
+	public String getInicio(){
+		String time= "Es la hora"+hor+":"+min;
+		return time;
+	}
+	
+}

@@ -1,0 +1,14 @@
+
+public class Cargador {
+	Generador g = new Generador();;
+	
+	
+	public Cargador{
+	}
+	
+	public void crearCode(){
+		
+	}
+
+	
+}

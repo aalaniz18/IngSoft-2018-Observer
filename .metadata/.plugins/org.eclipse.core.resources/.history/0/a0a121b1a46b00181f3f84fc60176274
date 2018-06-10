@@ -1,0 +1,12 @@
+
+public class Producto {
+	int IDprod;
+	double precio;
+	int cantidad;
+	double precioU;
+	
+	public Producto(){
+	}
+	
+
+}

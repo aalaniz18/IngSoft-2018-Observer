@@ -1,0 +1,17 @@
+
+public class Codigo {
+	private String code;
+	
+	public Codigo(String code){
+		this.code=code;
+	}
+	
+	public void setCode(String s){
+		code=s;
+	}
+
+	public String setCode(){
+		return code;
+	}
+	
+}

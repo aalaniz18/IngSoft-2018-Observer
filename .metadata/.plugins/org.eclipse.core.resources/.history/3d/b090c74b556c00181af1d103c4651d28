@@ -1,0 +1,24 @@
+public class Cargador {
+	
+	String a;
+	
+	public Cargador(){
+		a="Hola";
+	}
+	
+	public void operacionCompra(){
+		
+	}
+	
+	public void crearCode(Compra c){
+		Generador g= new Generador();
+		c.setCodigo(g.creaPass());
+	}
+	
+	public void finCompra(Compra c){
+		c.startValido();
+		//falta resumen
+	}
+
+	
+}

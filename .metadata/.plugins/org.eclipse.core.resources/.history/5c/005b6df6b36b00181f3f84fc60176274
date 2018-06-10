@@ -1,0 +1,27 @@
+import java.util.Date;
+
+public class Codigo {
+	private String code;
+	private Date inicial;
+	
+	public Codigo(String code){
+		this.code=code;
+	}
+	
+	public void setCode(String s){
+		code=s;
+	}
+
+	public String getCode(){
+		return code;
+	}
+	
+	public void setInicio(){
+		inicial= new Date();
+	}
+	
+	public Date getInicio(){
+		return inicial;
+	}
+	
+}

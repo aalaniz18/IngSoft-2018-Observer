@@ -1,0 +1,29 @@
+import java.util.ArrayList;
+
+public class Compra {
+	
+	private ArrayList<Producto> p;
+	private double total;
+	private FormaPago f;
+	private Codigo c;
+	
+	public Compra(){
+		total= 0.0;
+		p = new ArrayList<Producto>();
+	}
+	
+	/* El parametro i es el orden de casillero elegido por el usuario. Supongo primero a Entrada
+	 * segundo a Comida y tercero a Merchandising. */
+	public void agregarProducto(int i){
+		if(i==1){
+			new Entrada();
+		}
+		if(i==2){
+		//	p= new Comida();
+		}
+		else
+			//p= new Merchandising();
+	}
+	
+
+}

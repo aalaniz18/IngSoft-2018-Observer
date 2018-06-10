@@ -1,0 +1,15 @@
+public class Cargador {
+	
+	String a;
+	
+	public Cargador{
+		a="Hola";
+	}
+	
+	public void crearCode(Compra c){
+		Generador g= new Generador();
+		c.setCodigo(g.creaPass());
+	}
+
+	
+}

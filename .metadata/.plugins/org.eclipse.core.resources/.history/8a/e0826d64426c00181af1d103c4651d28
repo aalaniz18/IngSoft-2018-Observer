@@ -1,0 +1,24 @@
+
+public class Entrada extends Producto{
+	String pelicula;
+	String ubicacion;
+	
+	public Entrada(String ubicacion,String pelicula){
+		super();
+		this.ubicacion=ubicacion;
+		this.pelicula=
+	}
+	
+	public void setNombreP(String n){
+		pelicula=n;}
+	
+	public String getNombreP(){
+		return pelicula;}
+	
+	public void setUbicacion(String u){
+		ubicacion=u;}
+	
+	public String getUbicacion(){
+		return ubicacion;}
+
+}

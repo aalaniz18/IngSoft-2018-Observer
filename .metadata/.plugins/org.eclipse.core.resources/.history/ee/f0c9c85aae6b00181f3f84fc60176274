@@ -1,0 +1,27 @@
+import java.util.Calendar;
+
+public class Codigo {
+	private String code;
+	private Calendar inicial;
+	
+	public Codigo(String code){
+		this.code=code;
+	}
+	
+	public void setCode(String s){
+		code=s;
+	}
+
+	public String getCode(){
+		return code;
+	}
+	
+	public void setInicio(){
+		inicial= new Calendar();
+	}
+	
+	public Calendar getInicio(){
+		return inicial;
+	}
+	
+}
