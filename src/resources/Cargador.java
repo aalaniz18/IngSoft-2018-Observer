@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-import java.util.Collection;
+//import java.util.Collection;
 import java.util.HashMap;
 
 public class Cargador {
@@ -19,6 +19,10 @@ public class Cargador {
 		return exito;
 	}
 	
+	public void cargarAdmin(Administrador a){
+		bd.addAdministrador(a);
+	}
+	
 	public BaseDeDatos getBase(){
 		return bd;
 	}
@@ -35,7 +39,7 @@ public class Cargador {
 		return asientos;
 	}
 
-	public ArrayList<String> listarFunciones(){
+	/*public ArrayList<String> listarFunciones(){
 		HashMap<Integer,FuncionesCine> m=bd.getMapFuncion();
 		Collection<FuncionesCine> f= new ArrayList<FuncionesCine>();
 		f=m.values();
