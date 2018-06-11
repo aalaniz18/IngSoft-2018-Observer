@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class Cargador {
@@ -9,24 +11,37 @@ public class Cargador {
 	}
 	
 	public boolean validarAdmin(String usua, String pass){ // hacer test, muy facil
+		boolean exito = false;
 		HashMap<String,String> m=bd.getMapAdmin();
 		if(m.containsKey(usua)){
-			if(pass==m.get(usua)){
-				return true;}
-			else
-				return false;
-			}
-		else
-			return false;
+			exito = pass == m.get(usua);
+		}
+		return exito;
 	}
 	
 	public BaseDeDatos getBase(){
 		return bd;
 	}
 	
-	public int[] listarLibres(int id) // no esta terminada, cuando vuelva la sigo
-	
-	
+	public ArrayList<Integer> listarLibres(int id){
+		HashMap<Integer,FuncionesCine> m=bd.getMapFuncion();
+		FuncionesCine f= m.get(id);
+		ArrayList<Integer> asientos= new ArrayList<Integer>();
+		for(int i=0;i<f.getNAsientos();i++){
+			if(f.getDesocupados()[i]==true){
+				asientos.add(i);
+			}	
+		}
+		return asientos;
+	}
+
+	public ArrayList<String> listarFunciones(){
+		HashMap<Integer,FuncionesCine> m=bd.getMapFuncion();
+		Collection<FuncionesCine> f= new ArrayList<FuncionesCine>();
+		f=m.values();
+		return f;
+		
+	}
 	
 	/*
 	public void iniciaCompra(){

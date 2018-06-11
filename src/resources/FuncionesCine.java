@@ -21,6 +21,9 @@ public class FuncionesCine {
 	
 	public int getID(){
 		return IDfunc;}
+	
+	public int getNAsientos(){
+		return nAsientos;}
 
 	public void cargarDisponibles(){
 		for(int i=0; i<nAsientos; i++){
