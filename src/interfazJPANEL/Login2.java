@@ -3,27 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
-/// REVISAR LINEA 148
 package interfazJPANEL;
-import resources.*;
+
 import javax.swing.JOptionPane;
 import model.Cargador;
+
 /**
  *
- * @author Esteban
+ * @author perez
  */
-public class Login extends javax.swing.JFrame {
+public class Login2 extends javax.swing.JFrame {
 private String User;
 private String Pass;
     /**
-     * Creates new form Login
+     * Creates new form Login2
      */
-    public Login() {
+    public Login2() {
         initComponents();
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.setResizable(false);
     }
 
     /**
@@ -35,6 +31,7 @@ private String Pass;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -50,9 +47,15 @@ private String Pass;
         jLabel7 = new javax.swing.JLabel();
         jPasswordField3 = new javax.swing.JPasswordField();
         jButton3 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jButton1.setText("VOLVER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("USUARIO");
 
@@ -187,13 +190,6 @@ private String Pass;
                 .addContainerGap(105, Short.MAX_VALUE))
         );
 
-        jButton1.setText("VOLVER");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -221,41 +217,40 @@ private String Pass;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-this.setVisible(false);
-Home home = new Home();
-home.setVisible(true);
- 
+        this.setVisible(false);
+        Home home = new Home();
+        home.setVisible(true);
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-                this.User=jTextField1.getText().toLowerCase();
-                this.Pass=jPasswordField1.getText().toLowerCase();
- //               charg = new Cargador();
-       // if (charg. ){
-               Cargador ch = new Cargador();
-      if((ch.validarAdmin(User, Pass)==true)||((User.equalsIgnoreCase("admin")) &&(Pass.equalsIgnoreCase("admin") ) ))
-       {
-                    this.setVisible(false);
- HomeAdmin cs =new HomeAdmin();
- cs.setVisible(true);
-                    
-               }
-               
-                else{
-                        JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
-
-                }
-            
-              
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+        this.Pass=jPasswordField1.getText().toLowerCase();
+    }//GEN-LAST:event_jPasswordField1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         this.User=jTextField1.getText().toLowerCase();
     }//GEN-LAST:event_jTextField1ActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        this.User=jTextField1.getText().toLowerCase();
         this.Pass=jPasswordField1.getText().toLowerCase();
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+        //               charg = new Cargador();
+        // if (charg. ){
+            Cargador ch = new Cargador();
+            if((ch.validarAdmin(User, Pass)==true)||((User.equalsIgnoreCase("empleado")) &&(Pass.equalsIgnoreCase("empleado") ) ))
+            {
+                this.setVisible(false);
+                HomeEmpleado cs = new HomeEmpleado();
+                cs.setVisible(true);
+
+            }
+
+            else{
+                JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
+
+            }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
         // TODO add your handling code here:
@@ -290,20 +285,20 @@ home.setVisible(true);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Login2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Login().setVisible(true);
+                new Login2().setVisible(true);
             }
         });
     }

@@ -16,6 +16,8 @@ public class HomeEmpleado extends javax.swing.JFrame {
      */
     public HomeEmpleado() {
         initComponents();
+                this.setLocationRelativeTo(null);
+this.setResizable(false);
     }
 
     /**

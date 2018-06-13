@@ -16,6 +16,8 @@ public class ConsultaStock extends javax.swing.JFrame {
      */
     public ConsultaStock() {
         initComponents();
+                this.setLocationRelativeTo(null);
+this.setResizable(false);
     }
 
     /**
@@ -34,6 +36,11 @@ public class ConsultaStock extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jButton1.setText("VOLVER");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setBorder(javax.swing.BorderFactory.createCompoundBorder());
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -82,6 +89,13 @@ public class ConsultaStock extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+this.setVisible(false);
+HomeAdmin ha = new HomeAdmin();
+ha.setVisible(true);
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

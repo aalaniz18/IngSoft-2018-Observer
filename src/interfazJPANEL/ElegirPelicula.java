@@ -72,7 +72,12 @@ public class ElegirPelicula extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setText("Saltear");
+        jButton6.setText("LISTO");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("Deadpool");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -164,6 +169,13 @@ compraTickets ct = new compraTickets();
 ct.setVisible(true);
 
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+
+this.setVisible(false);
+PAGO p = new PAGO();
+p.setVisible(true);
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments

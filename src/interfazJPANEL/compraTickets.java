@@ -37,6 +37,17 @@ jComboBox1.addItem("H");
 jComboBox1.addItem("I");
 jComboBox1.addItem("J");
 
+jComboBox2.removeAllItems();
+jComboBox2.addItem("1");
+jComboBox2.addItem("2");
+jComboBox2.addItem("3");
+jComboBox2.addItem("4");
+jComboBox2.addItem("5");
+jComboBox2.addItem("6");
+jComboBox2.addItem("7");
+jComboBox2.addItem("8");
+
+
        // this.getContentPane().setBackground(Color.orange);
 
       
@@ -86,6 +97,11 @@ jComboBox1.addItem("J");
         jLabel2.setText("  ASIENTO");
 
         jButton2.setText("VOLVER");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("Va a comprar mas entradas?");
         jCheckBox1.setActionCommand("¿Va a comprar mas entradas?");
@@ -172,13 +188,20 @@ jComboBox1.addItem("J");
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 this.setVisible(false);
-compraTickets ct = new compraTickets();
-ct.setVisible(true);
+PAGO p = new PAGO();
+p.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+this.setVisible(false);
+ElegirPelicula ep = new ElegirPelicula();
+ep.setVisible(true);
+
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments

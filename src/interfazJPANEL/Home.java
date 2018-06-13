@@ -10,7 +10,7 @@ package interfazJPANEL;
  * @author Esteban
  */
 public class Home extends javax.swing.JFrame {
-
+public String born;
     /**
      * Creates new form Home
      */
@@ -36,7 +36,6 @@ public class Home extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jButton2.setText("ADMINISTRADOR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -90,9 +89,10 @@ public class Home extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        HomeAdmin ha = new HomeAdmin();
+        Login ha = new Login();
         this.setVisible(false);
         ha.setVisible(true);
+        setborn("a");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -103,11 +103,18 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        HomeEmpleado he = new HomeEmpleado();
         this.setVisible(false);
-        he.setVisible(true);
+        Login2 lg = new Login2();
+        lg.setVisible(true);
+        setborn("e");
+        
     }//GEN-LAST:event_jButton6ActionPerformed
-
+     public void setborn(String born){
+     this.born = born;
+     }
+     public String getborn(){
+     return born;
+     }
     /**
      * @param args the command line arguments
      */

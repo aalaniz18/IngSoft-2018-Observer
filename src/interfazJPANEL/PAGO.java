@@ -16,6 +16,8 @@ public class PAGO extends javax.swing.JFrame {
      */
     public PAGO() {
         initComponents();
+                this.setLocationRelativeTo(null);
+this.setResizable(false);
     }
 
     /**

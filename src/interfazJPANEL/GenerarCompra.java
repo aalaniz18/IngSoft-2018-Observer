@@ -16,6 +16,8 @@ public class GenerarCompra extends javax.swing.JFrame {
      */
     public GenerarCompra() {
         initComponents();
+                this.setLocationRelativeTo(null);
+this.setResizable(false);
     }
 
     /**
