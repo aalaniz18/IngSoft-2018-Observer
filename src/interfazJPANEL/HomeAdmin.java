@@ -5,6 +5,10 @@
  */
 package interfazJPANEL;
 
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author perez
@@ -115,8 +119,14 @@ cs.setVisible(true);    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 this.setVisible(false);
-CargaStock cs = new CargaStock();
-cs.setVisible(true);
+CargaStock cs;
+        try {
+            cs = new CargaStock();
+            cs.setVisible(true);
+        } catch (SQLException ex) {
+            Logger.getLogger(HomeAdmin.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

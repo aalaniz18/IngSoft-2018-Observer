@@ -236,19 +236,18 @@ private String Pass;
         this.Pass=jPasswordField1.getText().toLowerCase();
         //               charg = new Cargador();
         // if (charg. ){
-            Cargador ch = new Cargador();
-            if((ch.validarAdmin(User, Pass)==true)||((User.equalsIgnoreCase("empleado")) &&(Pass.equalsIgnoreCase("empleado") ) ))
-            {
+            //if((ch.validarAdmin(User, Pass)==true)||((User.equalsIgnoreCase("empleado")) &&(Pass.equalsIgnoreCase("empleado") ) ))
+           // {
                 this.setVisible(false);
                 HomeEmpleado cs = new HomeEmpleado();
                 cs.setVisible(true);
 
-            }
+          //  }
 
-            else{
-                JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
+          //  else{
+          //      JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
 
-            }
+         //   }
 
     }//GEN-LAST:event_jButton2ActionPerformed
 

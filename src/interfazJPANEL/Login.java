@@ -6,6 +6,9 @@
 
 /// REVISAR LINEA 148
 package interfazJPANEL;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import resources.*;
 import javax.swing.JOptionPane;
 import model.Cargador;
@@ -16,11 +19,13 @@ import model.Cargador;
 public class Login extends javax.swing.JFrame {
 private String User;
 private String Pass;
-    /**
+Cargador c;    
+/**
      * Creates new form Login
      */
     public Login() {
         initComponents();
+        
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -230,21 +235,23 @@ home.setVisible(true);
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
                 this.User=jTextField1.getText().toLowerCase();
                 this.Pass=jPasswordField1.getText().toLowerCase();
- //               charg = new Cargador();
-       // if (charg. ){
-               Cargador ch = new Cargador();
-      if((ch.validarAdmin(User, Pass)==true)||((User.equalsIgnoreCase("admin")) &&(Pass.equalsIgnoreCase("admin") ) ))
-       {
-                    this.setVisible(false);
- HomeAdmin cs =new HomeAdmin();
- cs.setVisible(true);
-                    
-               }
-               
-                else{
-                        JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
+    try {
+       c = new Cargador();
+        if(c.validarAdmin(User, Pass)==true)
+        {
+            this.setVisible(false);
+            HomeAdmin cs =new HomeAdmin();
+            cs.setVisible(true);
+            
+        }
+        
+          else{
+                  JOptionPane.showMessageDialog(null, "Usuario o contraseña erronea");
 
-                }
+  }
+    } catch (SQLException ex) {
+        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+    }
             
               
     }//GEN-LAST:event_jButton2ActionPerformed

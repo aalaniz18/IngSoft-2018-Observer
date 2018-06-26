@@ -10,6 +10,7 @@ import controller.ControllerCine;
 import java.sql.Connection;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import model.Connect;
 
 /**
  *
@@ -20,7 +21,7 @@ public class main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException{
                      
             //conexion
-            
+           // Connect c = new Connect();
            ControllerCine cc = new ControllerCine();
                     } 
 

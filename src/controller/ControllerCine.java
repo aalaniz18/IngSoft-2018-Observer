@@ -1,11 +1,15 @@
 package controller;
 import model.*;
 import interfazJPANEL.*;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class ControllerCine implements ControllerInterface{
 	Cargador model;
         Home view;
         String args = "iniciar";
+        Connect c;
 	public ControllerCine(){
         iniciar();
         }
@@ -15,8 +19,14 @@ public class ControllerCine implements ControllerInterface{
 	}
 	
 	public void iniciar(){
-		Home h = new Home();
+            try {	
+                c = new Connect();
+            } catch (SQLException ex) {
+                Logger.getLogger(ControllerCine.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            Home h = new Home();
                 h.setVisible(true);
+                
 	}
 
 }

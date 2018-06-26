@@ -1,4 +1,8 @@
 package model;
+import java.sql.CallableStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import resources.*;
 
 import java.util.ArrayList;
@@ -8,19 +12,31 @@ import java.util.HashMap;
 
 public class Cargador {
 	//Compra c1;
+        CallableStatement cs;
 	private BaseDeDatos bd;
-	
-	public Cargador(){
+	 Connect cn;
+          ResultSet rs ;
+    Statement s ;
+	public Cargador() throws SQLException{
 		bd= new BaseDeDatos();
+                cn = new Connect();
+                
 	}
 	
-	public boolean validarAdmin(String usua, String pass){ 
-		boolean exito = false;
-		HashMap<String,String> m=bd.getMapAdmin();
-		if(m.containsKey(usua)){
-			exito = pass == m.get(usua);
-		}
-		return exito;
+	public boolean validarAdmin(String usua, String pass) throws SQLException{ 
+		
+		
+                
+                  s = cn.getConnection().createStatement();
+                rs = s.executeQuery ("select * from usuarios");          
+                           while (rs.next()) 
+{ 
+if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
+return true;
+}
+} 
+           
+		return false;
 	}
 	
 	public void cargarAdmin(Administrador a){
@@ -72,6 +88,19 @@ public class Cargador {
 		c.startValido();
 		//falta resumen
 	}
-
+        public void quitarStock (String prodNom,int cant) throws SQLException{
+        cs= cn.getConnection().prepareCall("{call RestaStock(?,?)}");
+        cs.setString("nombreProd", prodNom);
+        cs.setInt("Cantidad", cant);
+        cs.executeUpdate();
+        System.out.println("c borro");
+        }
+        public void agregarStock (String prodNom,int cant) throws SQLException{
+        cs= cn.getConnection().prepareCall("{call SumaStock(?,?)}");
+        cs.setString("nombreProd", prodNom);
+        cs.setInt("Cantidad", cant);
+        cs.executeUpdate();
+        System.out.println("c agrego");
+        }
 	
 }

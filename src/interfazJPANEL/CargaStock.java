@@ -7,7 +7,14 @@ package interfazJPANEL;
 
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.Cargador;
+import model.Connect;
 import resources.BaseDeDatos;
 import resources.Producto;
 
@@ -18,19 +25,27 @@ import resources.Producto;
 public class CargaStock extends javax.swing.JFrame {
 public String BoxSelect;
 public int SpinnerValue;
+Cargador c;
+ ResultSet rs ;
+    Statement s ;
     /**
      * Creates new form CargaStock
      */
-    public CargaStock() {
+    public CargaStock() throws SQLException {
         initComponents();
-        jComboBox1.removeAllItems();
-jComboBox1.addItem("Pochoclos");
-jComboBox1.addItem("Gaseosas");
-jComboBox1.addItem("Snacks");
+                jComboBox1.removeAllItems();
 jComboBox2.removeAllItems();
-jComboBox2.addItem("Pochoclos");
-jComboBox2.addItem("Gaseosas");
-jComboBox2.addItem("Snacks");
+
+        Connect Cn = new Connect();
+        
+        s = Cn.getConnection().createStatement();
+                rs = s.executeQuery ("select * from productos");          
+                           while (rs.next()) 
+{ 
+jComboBox1.addItem(rs.getString(2) );
+jComboBox2.addItem(rs.getString(2) );
+} 
+
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setResizable(false);
@@ -352,8 +367,17 @@ jComboBox2.addItem("Snacks");
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         SpinnerValue = (int) jSpinner1.getValue();
-        
+        Cargador c;
+    try {
+        c = new Cargador();
+        c.agregarStock(getBoxSelect(), (int) jSpinner1.getValue());
+
+    } catch (SQLException ex) {
+        Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
+    }
         JOptionPane.showMessageDialog(null, "Se agrego: "+ getSpinnerValue() +" " + getBoxSelect());
+        
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
@@ -362,6 +386,14 @@ jComboBox2.addItem("Snacks");
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         SpinnerValue = (int) jSpinner2.getValue();
+        Cargador c;
+    try {
+        c = new Cargador();
+        c.quitarStock(getBoxSelect(), (int) jSpinner2.getValue());
+
+    } catch (SQLException ex) {
+        Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
+    }
         JOptionPane.showMessageDialog(null, "Se Quito: "+ getSpinnerValue() +" " + getBoxSelect());    }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -451,7 +483,11 @@ ha.setVisible(true);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CargaStock().setVisible(true);
+                try {
+                    new CargaStock().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
