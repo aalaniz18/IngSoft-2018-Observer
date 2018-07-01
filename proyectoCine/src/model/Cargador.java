@@ -116,10 +116,11 @@ return true;
         cs.executeUpdate();
         System.out.println("c borro");  
         }
-        public void creaProducto (String prodnom,float prodprecio,String prodtipo, String prodcoment) throws SQLException{
-        cs = cn.getConnection().prepareCall("{call CreaProducto(?,?,?,?)}");
+        public void creaProducto (int prodid,String prodnom,double prodprecio,String prodtipo, String prodcoment) throws SQLException{
+        cs = cn.getConnection().prepareCall("{call CreaProducto(?,?,?,?,?)}");
+        cs.setInt("prodid", prodid);
         cs.setString("prodnom", prodnom);
-        cs.setFloat("prodprecio", prodprecio);
+        cs.setDouble("prodprecio", prodprecio);
         cs.setString("prodtipo", prodtipo);
         cs.setString("prodcoment", prodcoment);
         cs.executeUpdate();
@@ -127,8 +128,15 @@ return true;
         }
         public void borraProducto (String prodnom) throws SQLException{
         cs = cn.getConnection().prepareCall("{call BorraProducto(?)}");
-        cs.setString(prodnom, prodnom);
+        cs.setString("prodnom", prodnom);
         cs.executeUpdate();
                 System.out.println("c borro");  
         }
+        public int getIdProd() throws SQLException{
+        s = cn.getConnection().createStatement();
+        rs = s.executeQuery ("SELECT ProdId FROM productos ORDER BY ProdId DESC limit 1;");          
+        while (rs.next()){return rs.getInt(1)+1;}
+        return 0;
+        }
+                
 }
