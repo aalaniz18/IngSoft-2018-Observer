@@ -6,8 +6,7 @@ import java.util.Date;
 
 public class Main {
 	public static void main (String[] args) throws SQLException{
-		Cargador c= new Cargador();
-		
+Connect c= new Connect();		
 		
 		//System.out.println(co.getCod());
 		//System.out.println(co.getTime());

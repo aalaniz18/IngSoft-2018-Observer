@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfazJPANEL;
+package vista;
 
 /**
  *
@@ -50,7 +50,7 @@ this.setResizable(false);
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazJPANEL/mercado-pago-banner.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/mercado-pago-banner.png"))); // NOI18N
 
         jLabel2.setText("NUMERO TARJETA");
 

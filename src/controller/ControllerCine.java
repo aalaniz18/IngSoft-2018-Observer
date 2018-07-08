@@ -1,6 +1,6 @@
 package controller;
+import vista.Home;
 import model.*;
-import interfazJPANEL.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

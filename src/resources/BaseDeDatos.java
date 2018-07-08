@@ -28,9 +28,7 @@ public class BaseDeDatos {
 	
 	public void addFuncion(FuncionesCine f){
 		funciones.put(f.getID(),f);}
-        public void addProducto(Producto p){
-                productos.put(p.getPrecioU() ,p.getNombre() );
-        }
+       
 	
 	public HashMap<String,String> getMapAdmin(){
 		return admin;}

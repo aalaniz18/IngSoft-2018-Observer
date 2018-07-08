@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfazJPANEL;
+package vista;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -111,7 +111,7 @@ jComboBox2.addItem("8");
             }
         });
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/interfazJPANEL/400.400.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/400.400.jpg"))); // NOI18N
         jLabel3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);

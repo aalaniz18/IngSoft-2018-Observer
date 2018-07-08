@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfazJPANEL;
+package vista;
 
 /**
  *
@@ -35,7 +35,6 @@ public String born;
         jButton6 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(800, 600));
 
         jButton2.setText("ADMINISTRADOR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {

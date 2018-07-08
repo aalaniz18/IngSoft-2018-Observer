@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfazJPANEL;
+package vista;
 
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import controller.ControladorProducto;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -15,8 +14,6 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cargador;
 import model.Connect;
-import resources.BaseDeDatos;
-import resources.Producto;
 
 /**
  *
@@ -25,6 +22,7 @@ import resources.Producto;
 public class CargaStock extends javax.swing.JFrame {
 public String BoxSelect;
 public int SpinnerValue;
+ControladorProducto controlaProducto;
 Cargador c;
  ResultSet rs ;
     Statement s ;
@@ -33,22 +31,15 @@ Cargador c;
      */
     public CargaStock() throws SQLException {
         initComponents();
-                jComboBox1.removeAllItems();
-jComboBox2.removeAllItems();
+        setBoxs();
+        controlaProducto = new ControladorProducto();
 
-        Connect Cn = new Connect();
-        
-        s = Cn.getConnection().createStatement();
-                rs = s.executeQuery ("select * from productos");          
-                           while (rs.next()) 
-{ 
-jComboBox1.addItem(rs.getString(2) );
-jComboBox2.addItem(rs.getString(2) );
-} 
-
+                
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setResizable(false);
+        
+        
     }
 
     /**
@@ -105,7 +96,7 @@ jComboBox2.addItem(rs.getString(2) );
         jButton1.setText("AGREGAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AgregarStock(evt);
             }
         });
 
@@ -365,20 +356,22 @@ jComboBox2.addItem(rs.getString(2) );
          this.BoxSelect=(String) jComboBox1.getSelectedItem();
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void AgregarStock(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarStock
         SpinnerValue = (int) jSpinner1.getValue();
-        Cargador c;
     try {
-        c = new Cargador();
-        c.agregarStock(getBoxSelect(), (int) jSpinner1.getValue());
+        controlaProducto.cAgregarStock(getBoxSelect(),SpinnerValue);
 
     } catch (SQLException ex) {
         Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
     }
         JOptionPane.showMessageDialog(null, "Se agrego: "+ getSpinnerValue() +" " + getBoxSelect());
         
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
+    try {    
+        setBoxs();
+    } catch (SQLException ex) {
+        Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    }//GEN-LAST:event_AgregarStock
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
@@ -413,7 +406,15 @@ jComboBox2.addItem(rs.getString(2) );
     }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+    try {
+        c = new Cargador();
+        c.borraProducto(jTextField5.getText());
+        JOptionPane.showMessageDialog(null, "Se Borro: " + jTextField5.getText()) ;                                            
+
+    } catch (SQLException ex) {
+        Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
+    }
+  
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -421,17 +422,17 @@ jComboBox2.addItem(rs.getString(2) );
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-       BaseDeDatos bd = new BaseDeDatos();
-       Producto p = new Producto(jTextField1.getText(),jTextField2.getText());
-       if(bd.getMapProductos().containsKey(p)==true ){
-       JOptionPane.showMessageDialog(null, "Ya existe ese producto");
+    try {
+        c = new Cargador();
+        float f = Float.parseFloat(jTextField2.getText());
+        c.creaProducto(jTextField1.getText(), f , "indiferente", "prueba");
+        JOptionPane.showMessageDialog(null, "Agregado correctamente");
 
-       }
-       else{
-       bd.addProducto(p);
-              JOptionPane.showMessageDialog(null, "Agregado correctamente");
-
-       }
+    } catch (SQLException ex) {
+        Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
+    }
+       
+       
        
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -452,6 +453,21 @@ ha.setVisible(true);
     }
     public int getSpinnerValue(){ 
     return SpinnerValue;
+    }
+    public void setBoxs() throws SQLException{
+    jComboBox1.removeAllItems();
+jComboBox2.removeAllItems();
+
+        Connect Cn = new Connect();
+        
+        s = Cn.getConnection().createStatement();
+                rs = s.executeQuery ("select * from productos");          
+                           while (rs.next()) 
+{ 
+jComboBox1.addItem(rs.getString(2) );
+jComboBox2.addItem(rs.getString(2) );
+} 
+
     }
     /**
      * @param args the command line arguments

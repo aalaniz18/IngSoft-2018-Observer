@@ -1,5 +1,6 @@
 package resources;
 
+import model.Producto;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -19,19 +20,19 @@ public class Compra {
 	}
 	
 	public void agregarProducto(int IDprod,String precioU, String nomPelicula){
-			carrito.add(new Entrada(precioU,nomPelicula));
+			//carrito.add(new Entrada(precioU,nomPelicula));
 			items++;
 	}
 	
 	public void agregarProducto(int IDprod,String precioU,int cantidad, String nombre){
-		carrito.add(new Merchandising(precioU,cantidad,nombre));
+		//carrito.add(new Merchandising(precioU,cantidad,nombre));
 		items++;
 }
 	
 	public void setEntrada(int cantidad, String ubicacion){
-		Entrada e= (Entrada) carrito.get(0);
-		e.setCant(cantidad);
-		e.setUbicacion(ubicacion);
+		//Entrada e= (Entrada) carrito.get(0);
+		//e.setCant(cantidad);
+		//e.setUbicacion(ubicacion);
 	}
 
 	public void setCodigo(String a){
@@ -52,7 +53,7 @@ public class Compra {
 	
 	public void calculartotal(){
 		for(int i=0; i<items+1; i++){
-			total=total+carrito.get(i).getPrecio();
+			total=total+carrito.get(i).getProdPrecio();
 		}
 	}
 
