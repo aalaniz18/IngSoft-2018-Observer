@@ -88,12 +88,12 @@ return true;
 		c.startValido();
 		//falta resumen
 	}
-        public void quitarStock (String prodNom,int cant) throws SQLException{
+          public void quitarStock (String prodNom,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call RestaStock(?,?)}");
         cs.setString("nombreProd", prodNom);
         cs.setInt("Cantidad", cant);
         cs.executeUpdate();
-        System.out.println("c borro");
+        System.out.println("c quito");
         }
         public void agregarStock (String prodNom,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call SumaStock(?,?)}");
@@ -102,5 +102,40 @@ return true;
         cs.executeUpdate();
         System.out.println("c agrego");
         }
-	
+	public void creaUser (String user,String pass, String tipo) throws SQLException{
+        cs = cn.getConnection().prepareCall("{call CreaUsuario(?,?,?)}");
+        cs.setString("username", user);
+        cs.setString("pass", pass);
+        cs.setString("tipouser", tipo);
+        cs.executeUpdate();
+        System.out.println("c creo");
+        }
+        public void borraUser (String user) throws SQLException{
+        cs = cn.getConnection().prepareCall("{call BorraUsuario(?)}");
+        cs.setString("username", user);
+        cs.executeUpdate();
+        System.out.println("c borro");  
+        }
+        public void creaProducto (int prodid,String prodnom,double prodprecio,String prodtipo, String prodcoment) throws SQLException{
+        cs = cn.getConnection().prepareCall("{call CreaProducto(?,?,?,?,?)}");
+        cs.setInt("prodid", prodid);
+        cs.setString("prodnom", prodnom);
+        cs.setDouble("prodprecio", prodprecio);
+        cs.setString("prodtipo", prodtipo);
+        cs.setString("prodcoment", prodcoment);
+        cs.executeUpdate();
+                System.out.println("c creo");
+        }
+        public void borraProducto (String prodnom) throws SQLException{
+        cs = cn.getConnection().prepareCall("{call BorraProducto(?)}");
+        cs.setString("prodnom", prodnom);
+        cs.executeUpdate();
+                System.out.println("c borro");  
+        }
+        public int getIdProd() throws SQLException{
+        s = cn.getConnection().createStatement();
+        rs = s.executeQuery ("SELECT ProdId FROM productos ORDER BY ProdId DESC limit 1;");          
+        while (rs.next()){return rs.getInt(1)+1;}
+        return 0;
+        }
 }
