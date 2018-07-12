@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package vista;
+package view;
 
 import controller.ControladorProducto;
 import java.sql.ResultSet;
@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cargador;
 import model.Connect;
+import vista.HomeAdmin;
 
 /**
  *
@@ -425,7 +426,7 @@ Cargador c;
     try {
         c = new Cargador();
         float f = Float.parseFloat(jTextField2.getText());
-        c.creaProducto(jTextField1.getText(), f , "indiferente", "prueba");
+       // c.creaProducto(jTextField1.getText(), f , "indiferente", "prueba");
         JOptionPane.showMessageDialog(null, "Agregado correctamente");
 
     } catch (SQLException ex) {

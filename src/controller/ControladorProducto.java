@@ -24,7 +24,7 @@ public class ControladorProducto {
    return p;
    }
    public void cCreaProducto(Producto p) throws SQLException{
-   c.creaProducto(p.getProdNom() , p.getProdPrecio() , p.getProdTipo(), p.getProdComent());
+   c.creaProducto(c.getIdProd(),p.getProdNom() , p.getProdPrecio() , p.getProdTipo(), p.getProdComent());
    }
    public void cBorraProducto(String prodNom) throws SQLException{
    c.borraProducto(prodNom);
@@ -34,6 +34,5 @@ public class ControladorProducto {
    }
    public void cAgregarStock(String prodNom,int cant) throws SQLException{
    c.agregarStock(prodNom,cant);
-   }
-   
+   }  
 }

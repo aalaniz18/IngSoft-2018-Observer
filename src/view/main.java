@@ -6,31 +6,20 @@
 package vista;
 
 //import Database.Conectar;
-import controller.ControllerCine;
-import java.sql.Connection;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
-import model.Connect;
 
 /**
  *
  * @author Esteban
  */
 public class main {
-    
-    public static void main(String[] args) throws SQLException, ClassNotFoundException{
+    public static void main(String[] args) throws SQLException{
                      
-            //conexion
-           // Connect c = new Connect();
-           ControllerCine cc = new ControllerCine();
+            
+           
                     } 
-
-    
-          
-         
-                      
-                                   
-                                   
+           
+           
            }
-      
+
 

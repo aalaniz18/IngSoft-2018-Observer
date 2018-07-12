@@ -1,15 +1,16 @@
 package model;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 
 public class Producto {
-    
 	String prodnom;
-        float prodprecio;
+        double prodprecio;
         String prodtipo;
         String prodcoment;
         
-	public Producto(String prodnom,float prodprecio,String prodtipo, String prodcoment){
-            
+	public Producto(String prodnom,double prodprecio,String prodtipo, String prodcoment){
 	this.prodnom = prodnom;
         this.prodprecio = prodprecio;
         this.prodtipo = prodtipo;
@@ -21,7 +22,7 @@ public class Producto {
         return prodnom;
         }
         
-	public float getProdPrecio(){
+	public double getProdPrecio(){
         return prodprecio;
         }
 	
@@ -33,8 +34,6 @@ public class Producto {
         return prodcoment;
 }
 
-    public String getNombre() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    
       
 }
