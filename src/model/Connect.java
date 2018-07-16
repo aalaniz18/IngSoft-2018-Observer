@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import java.sql.Connection;
@@ -11,12 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author Esteban
- */
 public class Connect {
-    String url = "jdbc:mysql://192.168.0.6:3306/proyectocine"; 
+    String url = "localhost"; 
     String user = "root";
     String pass = "1234";
     ResultSet rs ;
@@ -40,7 +31,7 @@ public class Connect {
            
            
          } catch (ClassNotFoundException ex) {
-            throw new ClassCastException(ex.getMessage());
+            //throw new ClassCastException(ex.getMessage());
          }
         }
         public Connection getConnection(){

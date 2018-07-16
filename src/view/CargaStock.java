@@ -6,6 +6,8 @@
 package view;
 
 import controller.ControladorProducto;
+import controller.*;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,33 +16,26 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.Cargador;
 import model.Connect;
-import vista.HomeAdmin;
 
-/**
- *
- * @author Esteban
- */
-public class CargaStock extends javax.swing.JFrame {
-public String BoxSelect;
-public int SpinnerValue;
-ControladorProducto controlaProducto;
-Cargador c;
- ResultSet rs ;
+public class CargaStock extends javax.swing.JFrame{
+	
+	public String BoxSelect;
+	public int SpinnerValue;
+	ControladorProducto controlaProducto;
+	Cargador c;
+	ResultSet rs ;
     Statement s ;
-    /**
-     * Creates new form CargaStock
-     */
-    public CargaStock() throws SQLException {
+    ControllerInterface controller;
+    
+    public CargaStock(ControllerInterface controller){// throws SQLException {
+    	this.controller=controller;
         initComponents();
-        setBoxs();
-        controlaProducto = new ControladorProducto();
-
-                
+        //setBoxs();
+        //controlaProducto = new ControladorProducto();                
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setResizable(false);
-        
-        
+               
     }
 
     /**
@@ -425,8 +420,8 @@ Cargador c;
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
     try {
         c = new Cargador();
-        float f = Float.parseFloat(jTextField2.getText());
-       // c.creaProducto(jTextField1.getText(), f , "indiferente", "prueba");
+        double f = Double.parseDouble(jTextField2.getText());
+        c.creaProducto(c.getIdProd(),jTextField1.getText(), f , "indiferente", "prueba");
         JOptionPane.showMessageDialog(null, "Agregado correctamente");
 
     } catch (SQLException ex) {
@@ -441,13 +436,9 @@ Cargador c;
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-this.setVisible(false);
-HomeAdmin ha = new HomeAdmin();
-ha.setVisible(true);
-
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//OK!	
+    	controller.cambiarAHomeAdmin(this);
+    }
    
     public String getBoxSelect(){
     return BoxSelect;
@@ -455,6 +446,7 @@ ha.setVisible(true);
     public int getSpinnerValue(){ 
     return SpinnerValue;
     }
+    
     public void setBoxs() throws SQLException{
     jComboBox1.removeAllItems();
 jComboBox2.removeAllItems();
@@ -470,44 +462,44 @@ jComboBox2.addItem(rs.getString(2) );
 } 
 
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    new CargaStock().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-    }
+//    /**
+//     * @param args the command line arguments
+//     */
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(CargaStock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    new CargaStock().setVisible(true);
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(CargaStock.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -13,15 +13,15 @@ import java.util.HashMap;
 
 public class Cargador {
 	//Compra c1;
-        CallableStatement cs;
+    CallableStatement cs;
 	private BaseDeDatos bd;
-	 Connect cn;
-          ResultSet rs ;
-          PreparedStatement ps;
+	Connect cn;
+    ResultSet rs ;
+    PreparedStatement ps;
     Statement s ;
 	public Cargador() throws SQLException{
 		bd= new BaseDeDatos();
-                cn = new Connect();
+        cn = new Connect();
                 
 	}
 	

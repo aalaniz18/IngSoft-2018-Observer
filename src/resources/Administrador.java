@@ -5,29 +5,25 @@ public class Administrador {
 	private String contrasena;
 	private String nombre;
 	private static int contadorInstancia;
-	private static Administrador instancia;
+	private static Administrador instancia= null;
 	
-	public Administrador(String u, String c, String n){
+	private Administrador(String u, String c){
 		usuario=u;
 		contrasena=c;
-		nombre=n;
+//		nombre=n;
 		contadorInstancia=0;
 	}
 	
-	public Administrador(){
-		contadorInstancia=0;
-	}
-	
-	public static void crearInstancia(){
+	private static void crearInstancia(String a, String b){
 		if(instancia==null){
-			instancia= new Administrador();
+			instancia= new Administrador(a,b);
 		}
 	}
 	
-	public static Administrador getInstancia(){
+	public static Administrador getInstancia(String a, String b){
 		contadorInstancia++;
 		if(instancia==null){
-			crearInstancia();
+			crearInstancia(a,b);
 		}
 		return instancia;
 	}
