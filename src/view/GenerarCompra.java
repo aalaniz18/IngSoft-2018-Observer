@@ -5,14 +5,19 @@
  */
 package view;
 
-import controller.*;
+import javax.swing.JOptionPane;
 
-public class GenerarCompra extends javax.swing.JFrame{
+import controller.*;
+import model.Cargador;
+
+public class GenerarCompra extends javax.swing.JFrame implements ViewObserver{
 	
 	ControllerInterface controller;
+	Cargador model;
 	
-    public GenerarCompra(ControllerInterface controller) {
+    public GenerarCompra(ControllerInterface controller,Cargador model) {
     	this.controller=controller;
+    	this.model=model;
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -90,6 +95,7 @@ public class GenerarCompra extends javax.swing.JFrame{
         );
 
         pack();
+        model.registerObserver((ViewObserver) this);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
@@ -99,6 +105,11 @@ public class GenerarCompra extends javax.swing.JFrame{
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
     	controller.cambiarAHome(this);
     }
+    
+    @Override
+	public void update() {
+		JOptionPane.showMessageDialog(null, "Hay un cobro o retiro de productos esperando");
+	}
 
 //    /**
 //     * @param args the command line arguments
