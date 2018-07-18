@@ -58,7 +58,7 @@ public class ControllerEmp implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAPelicula(Home v) {//OK!
+	public void cambiarAHome2(Home v) {//OK!
 	}
 
 	@Override
@@ -170,6 +170,10 @@ public class ControllerEmp implements ControllerInterface{
 		c.setVisible(false);
 		GenerarCompra gc= new GenerarCompra(this);
 		gc.setVisible(true);
+	}
+	
+	@Override
+	public void cambiarAPelicula(HomeCliente hc) {//OK!
 	}
 	
 }

@@ -1,6 +1,5 @@
 package controller;
 import view.*;
-import view.Login;
 import model.*;
 //import java.sql.SQLException;
 //import java.util.logging.Level;
@@ -29,10 +28,10 @@ public class ControllerCine implements ControllerInterface{
             view.setVisible(true);     
 	}
 
-	public void cambiarAPelicula(Home v) {//OK!
+	public void cambiarAHome2(Home v) {//OK!
 		v.setVisible(false);
-		CompraTickets_v1 ct= new CompraTickets_v1(this);
-		ct.setVisible(true);
+		HomeCliente hc= new HomeCliente(this);
+		hc.setVisible(true);
 	}
 	
 	@Override
@@ -77,6 +76,9 @@ public class ControllerCine implements ControllerInterface{
 	
 	@Override
 	public void cambiarAHome2(CompraTickets_v1 ct) {//OK!
+		ct.setVisible(false);
+		HomeCliente hc= new HomeCliente(this);
+		hc.setVisible(true);
 	}
 	
 	public void cambiarAHome(Login l) {//OK!
@@ -150,6 +152,13 @@ public class ControllerCine implements ControllerInterface{
 	@Override
 	public void cambiarAHome2(Confirma c) {//OK!
 		c.setVisible(false);
+		HomeCliente hc= new HomeCliente(this);
+		hc.setVisible(true);
+	}
+
+	@Override
+	public void cambiarAPelicula(HomeCliente hc) {
+		hc.setVisible(false);
 		CompraTickets_v1 ct=new CompraTickets_v1(this);
 		ct.setVisible(true);
 	}

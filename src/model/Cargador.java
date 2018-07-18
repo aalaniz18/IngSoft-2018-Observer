@@ -5,21 +5,24 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import resources.*;
+import view.ViewObserver;
 
 import java.util.ArrayList;
 import java.util.Collection;
 //import java.util.Collection;
 import java.util.HashMap;
 
-public class Cargador {
+public class Cargador implements ModelSubject{
 	//Compra c1;
-    CallableStatement cs;
+	private ArrayList<ViewObserver> observers;
+	CallableStatement cs;
 	private BaseDeDatos bd;
 	Connect cn;
     ResultSet rs ;
     PreparedStatement ps;
     Statement s ;
 	public Cargador() throws SQLException{
+		observers= new ArrayList<ViewObserver>();
 		bd= new BaseDeDatos();
         cn = new Connect();
                 
@@ -27,7 +30,7 @@ public class Cargador {
 	
 	public boolean validarAdmin(String usua, String pass) throws SQLException{ 
 		s = cn.getConnection().createStatement();
-                rs = s.executeQuery ("select * from usuarios where UsuTipo=a");          
+                rs = s.executeQuery ("select * from usuarios where UsuTipo='a'");          
               
                 while (rs.next()){
                  if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
@@ -39,7 +42,7 @@ public class Cargador {
 	}
 	public boolean validarEmpleado(String usua, String pass) throws SQLException{ 
 		s = cn.getConnection().createStatement();
-                rs = s.executeQuery ("select * from usuarios where UsuTipo=e");          
+                rs = s.executeQuery ("select * from usuarios where UsuTipo='e'");          
               
                 while (rs.next()){
                  if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
@@ -196,4 +199,25 @@ public class Cargador {
                } 
             return 0;
         }
+        
+        @Override
+		public void registerObserver(ViewObserver o) {
+			observers.add(o);			
+		}
+
+		@Override
+		public void removeObserver(ViewObserver o) {
+			int i= observers.indexOf(o);
+			if(i>=0) {
+				observers.remove(i);
+			}
+		}
+
+		@Override
+		public void notifyObserver() {
+			for(int i=0; i<observers.size(); i++) {
+				ViewObserver observer = (ViewObserver) observers.get(i);
+				observer.update();
+			}
+		}
 }

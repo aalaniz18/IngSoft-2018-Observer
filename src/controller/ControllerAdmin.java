@@ -23,11 +23,10 @@ public class ControllerAdmin implements ControllerInterface{
 		v.setVisible(false);
 		Login l = new Login(this);
         l.setVisible(true);
-        //setborn("a");
 	}
 
 	@Override
-	public void cambiarAPelicula(Home v) {	//OK!
+	public void cambiarAHome2(Home v) {	//OK!
 	}
 
 	@Override
@@ -147,5 +146,8 @@ public class ControllerAdmin implements ControllerInterface{
 	public void cambiarAHome2(Confirma c) {//OK!
 	}
 	
+	@Override
+	public void cambiarAPelicula(HomeCliente hc) {//OK!
+	}
 
 }

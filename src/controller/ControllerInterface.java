@@ -11,7 +11,7 @@ public interface ControllerInterface {
 	
 	void cambiarALogin(HomeAdmin home);
 	
-	void cambiarAPelicula(Home v);
+	void cambiarAHome2(Home v);
 	
 	void cambiarAPelicula(GenerarCompra gc);
 	
@@ -54,5 +54,7 @@ public interface ControllerInterface {
 	void cambiarAFormaPago(Confirma c);
 
 	void cambiarAHome2(Confirma c);
+
+	void cambiarAPelicula(HomeCliente hc);
 	
 }
