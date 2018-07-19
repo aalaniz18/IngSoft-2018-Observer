@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Cargador;
@@ -66,7 +65,6 @@ public class ControllerAdmin implements ControllerInterface{
 		catch (SQLException e){
 			return false;
 		}
-		//return true;
 	}
 
 	@Override
@@ -141,37 +139,15 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAFormaPago(recibo r) {//OK!
+	public void cambiarAFormaPago(Confirma c) {//OK!
 	}
 
 	@Override
-	public void cambiarAHome2(recibo r) {//OK!
+	public void cambiarAHome2(Confirma c) {//OK!
 	}
 	
 	@Override
 	public void cambiarAPelicula(HomeCliente hc) {//OK!
 	}
-	
-	@Override
-	public void cambiarARecTick(GenerarCompra gc) {//OK!
-	}
-	
-	@Override
-	public void cambiarAHomeEmpleado(RecibirTiket rt) {
-	}
-	
-	@Override
-	public ResultSet getRSProd(String s) {
-		return model.stockProd(s);
-	}
-	
-	@Override
-	public void agregarStock(String prodNom,int cant){
-		try {
-			model.agregarStock(prodNom,cant);
-		} catch (SQLException e) {
-			e.printStackTrace();
-			}
-	}
-	
+
 }

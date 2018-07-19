@@ -80,11 +80,11 @@ public class Confirma extends javax.swing.JFrame {
 //    }
     
     private void endButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	//controller.cambiarAHome2(this);
+    	controller.cambiarAHome2(this);
     }                                         
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	//controller.cambiarAFormaPago(this);
+    	controller.cambiarAFormaPago(this);
     }
 
 }

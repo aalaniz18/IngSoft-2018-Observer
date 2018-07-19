@@ -1,5 +1,4 @@
 package controller;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import model.Cargador;
@@ -38,7 +37,7 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAHome2(Login l) {//OK!
 		l.setVisible(false);
-		GenerarCompra gc =new GenerarCompra(this,this.getModel());
+		GenerarCompra gc =new GenerarCompra(this);
 		gc.setVisible(true);	
 	}
 	
@@ -54,7 +53,7 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAHome2(CompraTickets_v1 ct) {
 		ct.setVisible(false);
-		GenerarCompra gc =new GenerarCompra(this,this.getModel());
+		GenerarCompra gc =new GenerarCompra(this);
 		gc.setVisible(true);
 	}
 
@@ -95,7 +94,6 @@ public class ControllerEmp implements ControllerInterface{
 		catch (SQLException e){
 			return false;
 		}
-		//return true;
 	}
 
 	@Override
@@ -149,56 +147,33 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAConfirma(formaPago fp) {
 		fp.setVisible(false);
-		recibo r=new recibo(this);
-		r.setVisible(true);
+		Confirma c= new Confirma(this);
+		c.setVisible(true);
 	}
 
 	@Override
 	public void cambiarAConfirma(PAGO p) {//OK!
 		p.setVisible(false);
-		recibo r=new recibo(this);
-		r.setVisible(true);
+		Confirma c=new Confirma(this);
+		c.setVisible(true);
 	}
 
 	@Override
-	public void cambiarAFormaPago(recibo r) {//OK!
-		r.setVisible(false);
+	public void cambiarAFormaPago(Confirma c) {//OK!
+		c.setVisible(false);
 		formaPago fp=new formaPago(this);
 		fp.setVisible(true);
 	}
 
 	@Override
-	public void cambiarAHome2(recibo r) {//OK!
-		r.setVisible(false);
-		GenerarCompra gc= new GenerarCompra(this,this.getModel());
+	public void cambiarAHome2(Confirma c) {//OK!
+		c.setVisible(false);
+		GenerarCompra gc= new GenerarCompra(this);
 		gc.setVisible(true);
 	}
 	
 	@Override
 	public void cambiarAPelicula(HomeCliente hc) {//OK!
-	}
-
-	@Override
-	public void cambiarARecTick(GenerarCompra gc) {
-		gc.setVisible(false);
-		RecibirTiket rt= new RecibirTiket(this);
-		rt.setVisible(true);
-	}
-
-	@Override
-	public void cambiarAHomeEmpleado(RecibirTiket rt) {
-		rt.setVisible(false);
-		GenerarCompra gc= new GenerarCompra(this,this.getModel());
-		gc.setVisible(true);
-	}
-
-	@Override
-	public ResultSet getRSProd(String s) {
-		return null;
-	}
-	
-	@Override
-	public void agregarStock(String nombre, int cant) {
 	}
 	
 }

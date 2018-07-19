@@ -1,6 +1,5 @@
 package controller;
 
-import java.sql.ResultSet;
 import model.Cargador;
 import view.*;
 
@@ -52,17 +51,10 @@ public interface ControllerInterface {
 
 	void cambiarAConfirma(PAGO p);
 
-	void cambiarAFormaPago(recibo r);
+	void cambiarAFormaPago(Confirma c);
 
-	void cambiarAHome2(recibo r);
+	void cambiarAHome2(Confirma c);
 
 	void cambiarAPelicula(HomeCliente hc);
 	
-	void cambiarARecTick(GenerarCompra gc);
-	
-	void cambiarAHomeEmpleado(RecibirTiket rt);
-	
-	ResultSet getRSProd(String s);
-
-	void agregarStock(String nombre, int cant);
 }

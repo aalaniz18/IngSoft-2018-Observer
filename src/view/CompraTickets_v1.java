@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-
 import controller.*;
 
 public class CompraTickets_v1 extends javax.swing.JFrame {
@@ -10,7 +8,6 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
 	private javax.swing.JComboBox<String> asientoBox;
     private javax.swing.JButton backButton;
     private javax.swing.JButton buyButton;
-    private javax.swing.JButton chargeButton;
     private javax.swing.JComboBox<String> filaBox;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -18,7 +15,7 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox<String> movieBox;
-    private javax.swing.JButton nextButton1;
+    private javax.swing.JButton nextButton;
     private javax.swing.JButton skipButton;
     ControllerInterface controller;
     
@@ -56,7 +53,7 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
        
     private void initComponents() {
 
-    	jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         buyButton = new javax.swing.JButton();
         filaBox = new javax.swing.JComboBox<String>();
         asientoBox = new javax.swing.JComboBox<String>();
@@ -65,10 +62,9 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        movieBox = new javax.swing.JComboBox();
+        movieBox = new javax.swing.JComboBox<String>();
         skipButton = new javax.swing.JButton();
-        chargeButton = new javax.swing.JButton();
-        nextButton1 = new javax.swing.JButton();
+        nextButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -115,17 +111,10 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
             }
         });
 
-        chargeButton.setText("CARGAR ASIENTOS DISPONIBLES");
-        chargeButton.addActionListener(new java.awt.event.ActionListener() {
+        nextButton.setText("SIGUIENTE");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chargeButtonActionPerformed(evt);
-            }
-        });
-
-        nextButton1.setText("SIGUIENTE");
-        nextButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nextButton1ActionPerformed(evt);
+                nextButtonActionPerformed(evt);
             }
         });
 
@@ -136,10 +125,6 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(backButton)
-                        .addGap(302, 302, 302)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(327, 327, 327)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(filaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -148,27 +133,25 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(asientoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(movieBox, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(backButton)
+                            .addGap(302, 302, 302)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(164, 164, 164)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(skipButton)
-                                .addGap(195, 195, 195)
-                                .addComponent(buyButton))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(movieBox, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 111, Short.MAX_VALUE)
-                                .addComponent(chargeButton)))))
-                .addGap(90, 90, 90))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 392, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(218, 218, 218))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(663, Short.MAX_VALUE)
-                    .addComponent(nextButton1)
-                    .addGap(79, 79, 79)))
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(147, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(skipButton)
+                .addGap(195, 195, 195)
+                .addComponent(buyButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(nextButton)
+                .addGap(89, 89, 89))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,30 +162,23 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
                         .addGap(19, 19, 19)
                         .addComponent(jLabel4)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(chargeButton, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(movieBox, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(movieBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(asientoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(filaBox, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(filaBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(asientoBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buyButton)
-                    .addComponent(skipButton))
+                    .addComponent(skipButton)
+                    .addComponent(nextButton))
                 .addGap(17, 17, 17))
-            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                    .addContainerGap(551, Short.MAX_VALUE)
-                    .addComponent(nextButton1)
-                    .addGap(7, 7, 7)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -217,12 +193,9 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         );
 
         pack();
-       }
+    }
 
-    protected void chargeButtonActionPerformed(ActionEvent evt) {
-	}
-
-	private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {
+    private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     private void filaBoxActionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +209,7 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     	controller.cambiarACompra(this);
     }
     
-    private void nextButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {
     	controller.cambiarACompra(this);
     	//falta agregar a la compra
     }
