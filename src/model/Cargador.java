@@ -52,6 +52,7 @@ public class Cargador implements ModelSubject{
            
 		return false;
 	}
+	
 	public void cargarAdmin(Administrador a){
 		bd.addAdministrador(a);
 	}
@@ -101,20 +102,23 @@ public class Cargador implements ModelSubject{
 		c.startValido();
 		//falta resumen
 	}
-          public void quitarStock (String prodNom,int cant) throws SQLException{
+	
+    public void quitarStock (String prodNom,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call RestaStock(?,?)}");
         cs.setString("nombreProd", prodNom);
         cs.setInt("Cantidad", cant);
         cs.executeUpdate();
         System.out.println("c quito");
         }
-        public void agregarStock (String prodNom,int cant) throws SQLException{
+    
+    public void agregarStock(String prodNom,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call SumaStock(?,?)}");
         cs.setString("nombreProd", prodNom);
         cs.setInt("Cantidad", cant);
         cs.executeUpdate();
         System.out.println("c agrego");
         }
+        
 	public void creaUser (String user,String pass, String tipo) throws SQLException{
         cs = cn.getConnection().prepareCall("{call CreaUsuario(?,?,?)}");
         cs.setString("username", user);
@@ -123,13 +127,15 @@ public class Cargador implements ModelSubject{
         cs.executeUpdate();
         System.out.println("c creo");
         }
-        public void borraUser (String user) throws SQLException{
+	
+    public void borraUser (String user) throws SQLException{
         cs = cn.getConnection().prepareCall("{call BorraUsuario(?)}");
         cs.setString("username", user);
         cs.executeUpdate();
         System.out.println("c borro");  
         }
-        public void creaProducto (int prodid,String prodnom,double prodprecio,String prodtipo, String prodcoment) throws SQLException{
+    
+    public void creaProducto (int prodid,String prodnom,double prodprecio,String prodtipo, String prodcoment) throws SQLException{
         cs = cn.getConnection().prepareCall("{call CreaProducto(?,?,?,?,?)}");
         cs.setInt("prodid", prodid);
         cs.setString("prodnom", prodnom);
@@ -139,31 +145,33 @@ public class Cargador implements ModelSubject{
         cs.executeUpdate();
                 System.out.println("c creo");
         }
-        public void borraProducto (String prodnom) throws SQLException{
+    
+    public void borraProducto (String prodnom) throws SQLException{
         cs = cn.getConnection().prepareCall("{call BorraProducto(?)}");
         cs.setString("prodnom", prodnom);
         cs.executeUpdate();
                 System.out.println("c borro");
         }
-        public int getIdProd() throws SQLException{
+        
+    public int getIdProd() throws SQLException{
         s = cn.getConnection().createStatement();
         rs = s.executeQuery ("SELECT ProdId FROM productos ORDER BY ProdId DESC limit 1;");          
         while (rs.next()){return rs.getInt(1)+1;}
         return 0;        
         }
-        public int getCantidad(int idProd) throws SQLException {
-        ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=? limit 1");
-        ps.setInt(1, idProd);
-        rs = ps.executeQuery();
-        int cant = 0;
-        while (rs.next()){
-        cant=rs.getInt(1);
-        }
-     
-        return cant;
+        
+    public int getCantidad(int idProd) throws SQLException {
+        	ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=? limit 1");
+        	ps.setInt(1, idProd);
+        	rs = ps.executeQuery();
+        	int cant = 0;
+        	while (rs.next()){
+        		cant=rs.getInt(1);
+        		}
+        	return cant;
         }
         
-        public void agregaItem(String codigoCompra,int idProd,String descProd,int cantidad,double prodPrecio,double precFinal) throws SQLException{
+    public void agregaItem(String codigoCompra,int idProd,String descProd,int cantidad,double prodPrecio,double precFinal) throws SQLException{
         cs = cn.getConnection().prepareCall("{call agregaItem(?,?,?,?,?,?)}");
         cs.setString("codigoCompra", codigoCompra);
         cs.setInt("idProd", idProd);
@@ -173,14 +181,15 @@ public class Cargador implements ModelSubject{
         cs.setDouble("precFinal", precFinal);
         cs.executeUpdate();
         }
-        public ResultSet obtenerCompra(String codigoCompra) throws SQLException{
+        
+    public ResultSet obtenerCompra(String codigoCompra) throws SQLException{
         ps = cn.getConnection().prepareStatement("select * from compras where codigoCompra = ?");
         ps.setString(1, codigoCompra);
         rs = ps.executeQuery();
         return rs;
         }
         
-        public int getIdRs(ResultSet rs, String ProdNom) throws SQLException {
+    public int getIdRs(ResultSet rs, String ProdNom) throws SQLException {
         while (rs.next()){
             if (rs.getString(2).equalsIgnoreCase(ProdNom))
             {
@@ -190,7 +199,7 @@ public class Cargador implements ModelSubject{
         return 0;
     }
         
-        public double getPrecio(int idProd) throws SQLException{
+    public double getPrecio(int idProd) throws SQLException{
         ps = cn.getConnection().prepareStatement("select prodPrecio from productos where ProdId = ?");
                 ps.setDouble(1, idProd);
                rs = ps.executeQuery();
@@ -200,13 +209,23 @@ public class Cargador implements ModelSubject{
             return 0;
         }
         
+    public ResultSet stockProd(String s) {
+        	try {
+				Statement sta= cn.getConnection().createStatement();
+				return sta.executeQuery (s);
+			} catch (SQLException e) {
+				e.printStackTrace();
+				return null;
+			}
+        }
+        
         @Override
-		public void registerObserver(ViewObserver o) {
+	public void registerObserver(ViewObserver o) {
 			observers.add(o);			
 		}
 
 		@Override
-		public void removeObserver(ViewObserver o) {
+	public void removeObserver(ViewObserver o) {
 			int i= observers.indexOf(o);
 			if(i>=0) {
 				observers.remove(i);
@@ -214,7 +233,7 @@ public class Cargador implements ModelSubject{
 		}
 
 		@Override
-		public void notifyObserver() {
+	public void notifyObserver() {
 			for(int i=0; i<observers.size(); i++) {
 				ViewObserver observer = (ViewObserver) observers.get(i);
 				observer.update();

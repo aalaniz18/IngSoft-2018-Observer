@@ -20,18 +20,18 @@ public class Connect {
           cnx= DriverManager.getConnection(url, user, pass) ;
 
             
-      //      s = cnx.createStatement();
-        //        rs = s.executeQuery ("select * from usuarios");          
-  //                         while (rs.next()) 
-//{ 
- //                       System.out.printf("User :"+rs.getString (2)+ "|| Pass: " + rs.getString(3) + "\n");   //JOptionPane.showMessageDialog(null,rs.getString (1)+ "/"+ rs.getString (2));
-//} 
+            s = cnx.createStatement();
+                rs = s.executeQuery ("select * from usuarios");          
+                           while (rs.next()) 
+{ 
+                        System.out.printf("User :"+rs.getString (2)+ "|| Pass: " + rs.getString(3) + "\n");   //JOptionPane.showMessageDialog(null,rs.getString (1)+ "/"+ rs.getString (2));
+} 
            
            
            
            
          } catch (ClassNotFoundException ex) {
-            //throw new ClassCastException(ex.getMessage());
+            throw new ClassCastException(ex.getMessage());
          }
         }
         public Connection getConnection(){
