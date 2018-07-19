@@ -210,13 +210,8 @@ public class Cargador implements ModelSubject{
         }
         
     public ResultSet stockProd(String s) {
-        	try {
-				Statement sta= cn.getConnection().createStatement();
-				return sta.executeQuery (s);
-			} catch (SQLException e) {
-				e.printStackTrace();
-				return null;
-			}
+        	//esto estaba mal
+return null;
         }
         
         @Override
@@ -239,4 +234,83 @@ public class Cargador implements ModelSubject{
 				observer.update();
 			}
 		}
+            public ResultSet getAsientos(int idPelicula){
+             s = cn.getConnection().createStatement();
+             rs = s.executeQuery("select * from entradasPelicula where ocupado = 0");
+             return rs;
+        }
+        public ResultSet getPeliculas(){
+            s = cn.getConnection().prepareStatement("select * from peliculas where fecha>? and hora<?");
+            s.setDate(sysdate);
+            s.setDate(HORA);
+            rs = s.executeQuery();
+            return rs;
+        }
+        public ResultSet getCompraFinalizada(String codCompra){
+            s = cn.getConnection().prepareStatement("select * from compras where codCompra = ?");
+            s.setString(codCompra);
+            rs = s.executeQuery();
+            return rs;
+        }
+        public ResultSet getRecibo(String codCompra){
+            s = cn.getConnection().prepareStatement("select * from compras co,carrito ca where codCompra = ?");
+            s.setString(codCompra);
+            rs = s.executeQuery();
+            return rs;
+        }
+        public void finalizarCompra(String codCompra, double total, date fecha, String descripcion){
+            s = cn.getConnection.prepareStatement("insert into compras (codCompra,total,fecha,descripcion) values (?,?,?,?)");
+            s.setString(codCompra);
+            s.setDouble(total);
+            s.setDate(fecha);
+            s.setString(descripcion);
+            s.executeUpdate();
+        }
+        public void setOcupado(String idPelicula,int idAsiento){
+            s = cn.getConnection().prepareStatement("update entradasPelicula set ocupado = 1 where idPelicula=? and idAsiento=?");
+            s.setString(idAsiento);
+            s.setInt(idAsiento);
+            s.executeUpdate();
+        }
+        public ResultSet CargarStock() throws SQLException{
+    s = cn.getConnection().createStatement();
+    rs = s.executeQuery("select * from productos");
+    return rs;}
+    
+    public ResultSet CargarCompra(String tablaCompra) throws SQLException {
+    ps = cn.getConnection().prepareStatement("select * from ?") ;
+    ps.setString(1, tablaCompra);
+    rs = ps.executeQuery();
+    return rs;
+    }
+    
+    public ResultSet GenerarRecibo(String codCompra) throws SQLException{
+    ps = cn.getConnection().prepareStatement("select * from recibos where codCompra = ?");
+    ps.setString(1, codCompra);
+    rs= ps.executeQuery();
+    return rs;
+    }
+    
+    public void GuardarCompra(Compra objCompra){
+    compra.add(objCompra);
+    }
+    
+    public Compra getObjCompra(){
+    
+    return compra.get(0);
+    }
+    
+    public ResultSet getUsuarios() throws SQLException{
+    s = cn.getConnection().createStatement();
+    rs =s.executeQuery("select * from usuarios");
+    return rs;
+    }
+    
+    public void imprimirUsers() throws SQLException{
+    ResultSet users=getUsuarios();
+                while(users.next()){
+                System.out.println("user:"+users.getString(2)+" || pass: "+users.getString(3));
+                }
+    }
+
 }
