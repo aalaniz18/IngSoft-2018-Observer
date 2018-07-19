@@ -1,5 +1,9 @@
 package controller;
 import view.*;
+import view.Login;
+
+import java.sql.ResultSet;
+
 import model.*;
 //import java.sql.SQLException;
 //import java.util.logging.Level;
@@ -131,27 +135,27 @@ public class ControllerCine implements ControllerInterface{
 	@Override
 	public void cambiarAConfirma(formaPago fp) {
 		fp.setVisible(false);
-		Confirma c= new Confirma(this);
-		c.setVisible(true);
+		recibo r=new recibo(this);
+		r.setVisible(true);
 	}
 
 	@Override
 	public void cambiarAConfirma(PAGO p) {//OK!
 		p.setVisible(false);
-		Confirma c=new Confirma(this);
-		c.setVisible(true);
+		recibo r=new recibo(this);
+		r.setVisible(true);
 	}
-
+	
 	@Override
-	public void cambiarAFormaPago(Confirma c) {//OK!
-		c.setVisible(false);
+	public void cambiarAFormaPago(recibo r) {//OK!
+		r.setVisible(false);
 		formaPago fp=new formaPago(this);
 		fp.setVisible(true);
 	}
 
 	@Override
-	public void cambiarAHome2(Confirma c) {//OK!
-		c.setVisible(false);
+	public void cambiarAHome2(recibo r) {//OK!
+		r.setVisible(false);
 		HomeCliente hc= new HomeCliente(this);
 		hc.setVisible(true);
 	}
@@ -161,6 +165,23 @@ public class ControllerCine implements ControllerInterface{
 		hc.setVisible(false);
 		CompraTickets_v1 ct=new CompraTickets_v1(this);
 		ct.setVisible(true);
+	}	
+	
+	@Override
+	public void cambiarARecTick(GenerarCompra gc) {//OK!
+	}
+	
+	@Override
+	public void cambiarAHomeEmpleado(RecibirTiket rt) {
+	}
+
+	@Override
+	public ResultSet getRSProd(String s) {
+		return null;
+	}
+
+	@Override
+	public void agregarStock(String nombre, int cant) {
 	}
 	
 }
