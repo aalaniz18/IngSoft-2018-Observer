@@ -16,7 +16,7 @@ import main.java.resources.Generador;
 import main.java.view.ViewObserver;
 
 public class Cargador implements ModelSubject{
-	//Compra c1;
+
 	private ArrayList<ViewObserver> observers;
 	CallableStatement cs;
 	Connect cn;
@@ -30,32 +30,28 @@ public class Cargador implements ModelSubject{
 		observers= new ArrayList<ViewObserver>();
 		compra=new ArrayList<Compra>();
         cn = new Connect();
-        cb= new CargaBox();
-                
+        cb= new CargaBox();           
 	}
 	
 	public boolean validarAdmin(String usua, String pass) throws SQLException{ 
 		s = cn.getConnection().createStatement();
-                rs = s.executeQuery ("select * from usuarios where UsuTipo='a'");          
-              
-                while (rs.next()){
-                 if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
-                 return true;
-                }
-        }  
-           
-		return false;
+        rs = s.executeQuery ("select * from usuarios where UsuTipo='a'");
+        while (rs.next()){
+        	if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
+        		return true;
+        	}
+        }
+        return false;
 	}
+	
 	public boolean validarEmpleado(String usua, String pass) throws SQLException{ 
 		s = cn.getConnection().createStatement();
-                rs = s.executeQuery ("select * from usuarios where UsuTipo='e'");          
-              
-                while (rs.next()){
-                 if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
-                 return true;
-                }
-        }  
-           
+	    rs = s.executeQuery ("select * from usuarios where UsuTipo='e'");          
+	    while (rs.next()){
+		     if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
+		    	 return true;
+		     }
+	    }          
 		return false;
 	}
 	
@@ -66,15 +62,10 @@ public class Cargador implements ModelSubject{
 		cs.executeUpdate();
 	}
 	
-	public void crearCode(Compra c){
-		Generador g= new Generador();
-		c.setCodigo(g.creaPass());
-	}
-	
-	public void finCompra(Compra c){
-		c.startValido();
-		//falta resumen
-	}
+//	public void crearCode(Compra c){
+//		Generador g= new Generador();
+//		c.setCodigo(g.creaCode());
+//	}
 	
     public void quitarStock (String prodNom,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call RestaStock(?,?)}");
@@ -176,38 +167,38 @@ public class Cargador implements ModelSubject{
         
     public double getPrecio(int idProd) throws SQLException{
         ps = cn.getConnection().prepareStatement("select prodPrecio from productos where ProdId = ?");
-                ps.setDouble(1, idProd);
-               rs = ps.executeQuery();
-               while (rs.next()){
-               return rs.getDouble(1);
-               } 
-            return 0;
-        }
+        ps.setDouble(1, idProd);
+        rs = ps.executeQuery();
+        while (rs.next()){
+        	return rs.getDouble(1);
+        } 
+        return 0;
+    }
     
     public CargaBox getCargaBox(){
     	return cb;
     }
         
-        @Override
+    @Override
 	public void registerObserver(ViewObserver o) {
-			observers.add(o);			
-		}
+		observers.add(o);			
+	}
 
-		@Override
+	@Override
 	public void removeObserver(ViewObserver o) {
-			int i= observers.indexOf(o);
-			if(i>=0) {
-				observers.remove(i);
-			}
+		int i= observers.indexOf(o);
+		if(i>=0) {
+			observers.remove(i);
 		}
+	}
 
-		@Override
+	@Override
 	public void notifyObserver() {
-			for(int i=0; i<observers.size(); i++) {
-				ViewObserver observer = (ViewObserver) observers.get(i);
-				observer.update();
-			}
+		for(int i=0; i<observers.size(); i++) {
+			ViewObserver observer = (ViewObserver) observers.get(i);
+			observer.update();
 		}
+	}
 		
 	public ResultSet getAsientos(int idPelicula) throws SQLException{
 		s = cn.getConnection().createStatement();
@@ -215,24 +206,33 @@ public class Cargador implements ModelSubject{
         return rs;
    }
 	
-   public ResultSet getPeliculas() throws SQLException{
-       ps = cn.getConnection().prepareStatement("select * from peliculas where fecha>? and hora<?");
-       ps.setDate(0, null);
-       rs = ps.executeQuery();
+   public ResultSet getPeliculas() throws SQLException{//OK!
+       s = cn.getConnection().createStatement();
+       rs = s.executeQuery("select * from peliculas");
        return rs;
    }
+   
+   public int getIdPelicula(String nomPelicula)throws SQLException{
+	   ps=cn.getConnection().prepareStatement("select id from peliculas where nomPelicula= ?");
+	   ps.setString(1, nomPelicula);
+	   rs=ps.executeQuery();
+	   return rs.getInt(1);
+   }
+   
    public ResultSet getCompraFinalizada(String codCompra) throws SQLException{
        ps = cn.getConnection().prepareStatement("select * from comprasfinalizadas where codCompra = ?");
        ps.setString(0,codCompra);
        rs = ps.executeQuery();
        return rs;
    }
+   
    public ResultSet getRecibo(String codCompra) throws SQLException{
        ps = cn.getConnection().prepareStatement("select * from compraactual where codCompra = ?");
        ps.setString(0,codCompra);
        rs = ps.executeQuery();
        return rs;
    }
+   
    public void finalizarCompra(String codCompra, double total, Date fecha, String descripcion) throws SQLException{
        ps = cn.getConnection().prepareStatement("insert into compras (codCompra,total,fecha,descripcion) values (?,?,?,?)");
        ps.setString(0,codCompra);
@@ -241,50 +241,53 @@ public class Cargador implements ModelSubject{
        ps.setString(3,descripcion);
        ps.executeUpdate();
    }
+   
    public void setOcupado(String idPelicula,int idAsiento) throws SQLException{
        ps = cn.getConnection().prepareStatement("update entradasPelicula set ocupado = 1 where idPelicula=? and idAsiento=?");
        ps.setString(0,idPelicula);
        ps.setInt(0,idAsiento);
        ps.executeUpdate();
    }
+   
    public ResultSet CargarStock() throws SQLException{
-s = cn.getConnection().createStatement();
-rs = s.executeQuery("select * from productos");
-return rs;}
+		s = cn.getConnection().createStatement();
+		rs = s.executeQuery("select * from productos");
+		return rs;
+   }
 
-public ResultSet CargarCompra(String codigoCompra) throws SQLException {
-ps = cn.getConnection().prepareStatement("select * from compraactual where codigoCompra = ?") ;
-ps.setString(1, codigoCompra);
-rs = ps.executeQuery();
-return rs;
-}
+	public ResultSet CargarCompra(String codigoCompra) throws SQLException {
+		ps = cn.getConnection().prepareStatement("select * from compraactual where codigoCompra = ?") ;
+		ps.setString(1, codigoCompra);
+		rs = ps.executeQuery();
+		return rs;
+	}
 
-public ResultSet GenerarRecibo(String codCompra) throws SQLException{
-ps = cn.getConnection().prepareStatement("select * from recibos where codCompra = ?");
-ps.setString(1, codCompra);
-rs= ps.executeQuery();
-return rs;
-}
-
-public void GuardarCompra(Compra objCompra){
-compra.add(objCompra);
-}
-
-public Compra getObjCompra(){
-
-return compra.get(0);
-}
-
-public ResultSet getUsuarios() throws SQLException{
-s = cn.getConnection().createStatement();
-rs =s.executeQuery("select * from usuarios");
-return rs;
-}
-
-public void imprimirUsers() throws SQLException{
-ResultSet users=getUsuarios();
-           while(users.next()){
-           System.out.println("user:"+users.getString(2)+" || pass: "+users.getString(3));
-           }
-}
+	public ResultSet GenerarRecibo(String codCompra) throws SQLException{
+		ps = cn.getConnection().prepareStatement("select * from recibos where codCompra = ?");
+		ps.setString(1, codCompra);
+		rs= ps.executeQuery();
+		return rs;
+	}
+	
+	public void GuardarCompra(Compra objCompra){
+		compra.add(objCompra);
+	}
+	
+	public Compra getObjCompra(){
+		return compra.get(0);
+	}
+	
+	public ResultSet getUsuarios() throws SQLException{
+		s = cn.getConnection().createStatement();
+		rs =s.executeQuery("select * from usuarios");
+		return rs;
+	}
+	
+	public void imprimirUsers() throws SQLException{
+		ResultSet users=getUsuarios();
+		while(users.next()){
+			System.out.println("user:"+users.getString(2)+" || pass: "+users.getString(3));
+       }
+	}
+	
 }

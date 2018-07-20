@@ -310,10 +310,7 @@ public class Compra extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
-//        Cargador c;
         try {
-//            c = new Cargador();
-//            CargaBox cb = new CargaBox();
             ResultSet Stock = controller.getModel().getCargaBox().CargarStock();
             int id = controller.getModel().getIdRs(Stock, jComboBox1.getSelectedItem().toString());
             double precio = controller.getModel().getPrecio(id);
@@ -358,8 +355,6 @@ public class Compra extends javax.swing.JFrame{
 
     private void setFilas(String codigoCompra) throws SQLException {//OK!
         Object datos[] = new Object[5];
-//        CargaBox c = new CargaBox();
-//        Cargador car = new Cargador();
         Generador gen = new Generador();
         ResultSet Resultados = controller.getModel().obtenerCompra(codigoCompra);
         while (Resultados.next()) {
@@ -373,13 +368,13 @@ public class Compra extends javax.swing.JFrame{
     private void setBoxStock() throws SQLException {//OK!
         jComboBox1.removeAllItems();
         jComboBox2.removeAllItems();
-//        CargaBox cb = new CargaBox();
-//        Cargador c = new Cargador();
         ResultSet Stock = controller.getModel().getCargaBox().CargarStock();
         while (Stock.next()) {
-            jComboBox1.addItem(Stock.getString(2));}
+            jComboBox1.addItem(Stock.getString(2));
+        }
         for (int i = 1; i < 11; i++) {
-            jComboBox2.addItem(String.valueOf(i));}
+            jComboBox2.addItem(String.valueOf(i));
+        }
     }
     
      private void cleanRows() {//OK!

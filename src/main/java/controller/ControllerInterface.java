@@ -87,4 +87,6 @@ public interface ControllerInterface {
 	boolean clearProducto(String text);
 
 	ResultSet getRSStock();
+
+	ResultSet setPelisBox();
 }

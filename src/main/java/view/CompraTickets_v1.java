@@ -2,7 +2,8 @@ package main.java.view;
 
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 
@@ -23,7 +24,7 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     private javax.swing.JButton skipButton;
     ControllerInterface controller;
     
-    public CompraTickets_v1(ControllerInterface controller) {
+    public CompraTickets_v1(ControllerInterface controller) throws SQLException {
     	this.controller=controller;
         initComponents();
         this.setLocationRelativeTo(null);
@@ -31,26 +32,8 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         this.setResizable(false);
         
         filaBox.removeAllItems();
-        filaBox.addItem("A");
-        filaBox.addItem("B");
-        filaBox.addItem("C");
-        filaBox.addItem("D");
-        filaBox.addItem("E");
-        filaBox.addItem("F");
-        filaBox.addItem("G");
-        filaBox.addItem("H");
-        filaBox.addItem("I");
-        filaBox.addItem("J");
-
         asientoBox.removeAllItems();
-        asientoBox.addItem("1");
-        asientoBox.addItem("2");
-        asientoBox.addItem("3");
-        asientoBox.addItem("4");
-        asientoBox.addItem("5");
-        asientoBox.addItem("6");
-        asientoBox.addItem("7");
-        asientoBox.addItem("8");
+        setmovieBox();
         
        // this.getContentPane().setBackground(Color.orange);
     }
@@ -119,7 +102,11 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         chargeButton.setText("CARGAR ASIENTOS DISPONIBLES");
         chargeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                chargeButtonActionPerformed(evt);
+                try {
+					chargeButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
             }
         });
 
@@ -220,7 +207,13 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         pack();
        }
 
-    protected void chargeButtonActionPerformed(ActionEvent evt) {
+    protected void chargeButtonActionPerformed(ActionEvent evt) throws SQLException {
+    	int i= controller.getModel().getIdPelicula((String) movieBox.getSelectedItem()); //falta idpelicula
+    	ResultSet asientos= controller.getModel().getAsientos(i);
+    	while(asientos.next()){
+ //   		filaBox.addItem(asientos.getString(noseque numero va));
+//    		asientoBox.addItem(asientos.getString(nose que va));
+    	}
 	}
 
 	private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,5 +233,13 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     private void nextButton1ActionPerformed(java.awt.event.ActionEvent evt) {
     	controller.cambiarACompra(this);
     	//falta agregar a la compra
+    }
+    
+    private void setmovieBox() throws SQLException{
+    	movieBox.removeAllItems();
+    	ResultSet pelis=controller.setPelisBox();
+    	while(pelis.next()){
+    		movieBox.addItem(pelis.getString(2)); 
+    	}
     }
 }

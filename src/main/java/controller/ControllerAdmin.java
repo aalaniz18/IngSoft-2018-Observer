@@ -234,5 +234,10 @@ public class ControllerAdmin implements ControllerInterface{
 	public ResultSet getRSStock() {//OK!!
 		return null;
 	}
+
+	@Override
+	public ResultSet setPelisBox() {
+		return null;
+	}
 	
 }

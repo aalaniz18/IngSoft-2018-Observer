@@ -78,7 +78,13 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarACompraTickets(Compra c) {//OK!
 		c.setVisible(false);
-		CompraTickets_v1 ct= new CompraTickets_v1(this);
+		CompraTickets_v1 ct;
+		try {
+			ct = new CompraTickets_v1(this);
+		} catch (SQLException e) {
+			ct=null;
+			e.printStackTrace();
+		}
 		ct.setVisible(true);
 	}
 
@@ -167,7 +173,13 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAPelicula(GenerarCompra gc) {
 		gc.setVisible(false);
-		CompraTickets_v1 ct= new CompraTickets_v1(this);
+		CompraTickets_v1 ct;
+		try {
+			ct = new CompraTickets_v1(this);
+		} catch (SQLException e) {
+			ct=null;
+			e.printStackTrace();
+		}
 		ct.setVisible(true);
 	}
 
@@ -246,6 +258,16 @@ public class ControllerEmp implements ControllerInterface{
 	public ResultSet getRSStock() {
 		try {
 			return model.getCargaBox().CargarStock();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	@Override
+	public ResultSet setPelisBox() {
+		try {
+			return model.getPeliculas();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;

@@ -10,7 +10,7 @@ public class Generador {
 	public Generador(){
 	}
 	
-	public String creaPass(){
+	public String creaCode(){
 		for(int i=0;i<8;i++){
 			int el = (int)(Math.random()*37);
 			conjunto[i] = (char)elementos[el];

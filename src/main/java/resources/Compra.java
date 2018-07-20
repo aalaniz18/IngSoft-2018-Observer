@@ -1,61 +1,24 @@
 package main.java.resources;
 
-import java.util.ArrayList;
-import java.util.Date;
-
-import main.java.model.Producto;
-
 public class Compra {
 	
-	private ArrayList<Producto> carrito;
 	private double total;
 	private FormaPago f;
 	private Codigo c;
-	private int items;
+	private boolean necEmpleado;
 	
 	public Compra(){
 		total= 0.0;
-		carrito = new ArrayList<Producto>();
-		c=new Codigo("xxxxxxxx");
-		items=0;
+		necEmpleado=false;
+		genCodigo();
 	}
 	
-	public void agregarProducto(int IDprod,String precioU, String nomPelicula){
-			//carrito.add(new Entrada(precioU,nomPelicula));
-			items++;
+	public void empleadoTrue(){
+		necEmpleado=true;
 	}
 	
-	public void agregarProducto(int IDprod,String precioU,int cantidad, String nombre){
-		//carrito.add(new Merchandising(precioU,cantidad,nombre));
-		items++;
-}
-	
-	public void setEntrada(int cantidad, String ubicacion){
-		//Entrada e= (Entrada) carrito.get(0);
-		//e.setCant(cantidad);
-		//e.setUbicacion(ubicacion);
-	}
-
-	public void setCodigo(String a){
-		c.setCode(a);
-	}
-	
-	public String getCod(){
-		return c.getCode();
-	}
-	
-	public Date getTime(){
-		return c.getInicio();
-	}
-	
-	public void startValido(){
-		c.iniciar();
-	}
-	
-	public void calculartotal(){
-		for(int i=0; i<items+1; i++){
-			total=total+carrito.get(i).getProdPrecio();
-		}
+	public void genCodigo(){
+		c=new Codigo(new Generador().creaCode());
 	}
 
 	/* El parametro i es el orden de casillero elegido por el usuario. Supongo primero a Efectivo
@@ -68,4 +31,9 @@ public class Compra {
 		if(i==3){
 			f= new Debito();}
 	}
+	
+	public double getTotal(){
+		return total;
+	}
+	
 }
