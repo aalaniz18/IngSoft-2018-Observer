@@ -26,7 +26,7 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     private javax.swing.JButton nextButton1;
     private javax.swing.JButton skipButton;
     ControllerInterface controller;
-    private int id;
+    private int idPelicula;
     
     public CompraTickets_v1(ControllerInterface controller) throws SQLException {
     	this.controller=controller;
@@ -36,7 +36,27 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         this.setResizable(false);
         
         filaBox.removeAllItems();
+        filaBox.addItem("A");
+        filaBox.addItem("B");
+        filaBox.addItem("C");
+        filaBox.addItem("D");
+        filaBox.addItem("E");
+        filaBox.addItem("F");
+        filaBox.addItem("G");
+        filaBox.addItem("H");
+        filaBox.addItem("I");
+        filaBox.addItem("J");
+        
         asientoBox.removeAllItems();
+        asientoBox.addItem("1");
+        asientoBox.addItem("2");
+        asientoBox.addItem("3");
+        asientoBox.addItem("4");
+        asientoBox.addItem("5");
+        asientoBox.addItem("6");
+        asientoBox.addItem("7");
+        asientoBox.addItem("8");
+
         setmovieBox();
         
        // this.getContentPane().setBackground(Color.orange);
@@ -63,7 +83,11 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         buyButton.setText("COMPRAR");
         buyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buyButtonActionPerformed(evt);
+                try {
+					buyButtonActionPerformed(evt);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
             }
         });
 
@@ -213,17 +237,18 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
 
     protected void chargeButtonActionPerformed(ActionEvent evt) throws SQLException {
     	String elegida = (String) movieBox.getSelectedItem();
-    	id= controller.getModel().getIdPelicula(elegida);
+    	idPelicula= controller.getModel().getIdPelicula(elegida);
 	}
 
-	private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {
+	private void buyButtonActionPerformed(java.awt.event.ActionEvent evt)throws SQLException {
 		String fila= (String) filaBox.getSelectedItem();
-		int asiento= (Integer) asientoBox.getSelectedItem();
-		if(!controller.getModel().estaOcupado(id,fila,asiento)){
+		int asiento= Integer.parseInt((String) asientoBox.getSelectedItem());
+		int idAsiento= controller.getModel().getIdAsiento(fila, asiento);
+		if(controller.getModel().estaOcupado(idPelicula,idAsiento)){
         	JOptionPane.showMessageDialog(null, "Asiento ocupado, por favor seleccione otro.");
 		}
 		else{
-			controller.iniciarCompra(id, controller.getModel().getIdAsiento());
+			controller.iniciarCompra(idPelicula,fila,asiento);
         	JOptionPane.showMessageDialog(null, "Asiento reservado con exito.");
 		}	
     }

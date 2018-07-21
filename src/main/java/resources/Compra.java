@@ -36,4 +36,8 @@ public class Compra {
 		return total;
 	}
 	
+	public String getCodigo(){
+		return c.getCode();
+	}
+	
 }

@@ -241,12 +241,12 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public boolean esDisponible(int id, String fila, int asiento) {
+	public boolean esDisponible(int idPelicula, int idAsiento) {
 		return false;
 	}
 
 	@Override
-	public void iniciarCompra(int id,int idAsiento) {		
+	public void iniciarCompra(int idPelicula, String fila, int columna) {		
 	}
 	
 }

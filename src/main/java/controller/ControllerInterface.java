@@ -90,9 +90,9 @@ public interface ControllerInterface {
 
 	ResultSet setPelisBox();
 	
-	boolean esDisponible(int id, String fila, int asiento);
-
-	void iniciarCompra(int id, int idAsiento);
+	public boolean esDisponible(int idPelicula, int idAsiento);
+	
+	void iniciarCompra(int idPelicula, String fila, int columna);
 	
 	
 }

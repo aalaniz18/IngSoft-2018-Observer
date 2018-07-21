@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class Connect {
-	String url = "jdbc:mysql://192.168.0.6:3306/proyectocine";
+	String url = "jdbc:mysql://192.168.0.6:3306/proyectocine?useLegacyDatetimeCode=false&serverTimezone=UTC";
     String user = "root";
     String pass = "1234";
     ResultSet rs ;
@@ -31,7 +31,7 @@ public class Connect {
            
            
          } catch (ClassNotFoundException ex) {
-            //throw new ClassCastException(ex.getMessage());
+            throw new ClassCastException(ex.getMessage());
          }
         }
         public Connection getConnection(){

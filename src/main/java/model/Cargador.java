@@ -137,14 +137,14 @@ public class Cargador implements ModelSubject{
         	return cant;
         }
         
-    public void agregaItem(String codigoCompra,int idProd,String descProd,int cantidad,double prodPrecio,double precFinal) throws SQLException{
+    public void agregaItem(int idProd,String descProd,int cantidad,double prodPrecio,double precFinal, String codigoCompra) throws SQLException{
         cs = cn.getConnection().prepareCall("{call agregaItem(?,?,?,?,?,?)}");
-        cs.setString("codigoCompra", codigoCompra);
         cs.setInt("idProd", idProd);
         cs.setString("descProd", descProd);
         cs.setInt("cantidad", cantidad);
         cs.setDouble("prodPrecio", prodPrecio);
         cs.setDouble("precFinal", precFinal);
+        cs.setString("codigoCompra", codigoCompra);
         cs.executeUpdate();
         }
         
@@ -246,11 +246,12 @@ public class Cargador implements ModelSubject{
        ps.executeUpdate();
    }
    
-   public void setOcupado(String idPelicula,int idAsiento) throws SQLException{
-       ps = cn.getConnection().prepareStatement("update entradasPelicula set ocupado = 1 where idPelicula=? and idAsiento=?");
-       ps.setString(1,idPelicula);
-       ps.setInt(2,idAsiento);
-       ps.executeUpdate();
+   public void setOcupado(int idPelicula,int idAsiento) throws SQLException{
+       //int idAsiento= this.getIdAsiento(fila, columna);
+       cs = cn.getConnection().prepareCall("call setOcupado(?,?)");
+       cs.setInt("p_idPelicula",idPelicula);
+       cs.setInt("p_idAsiento",idAsiento);
+       cs.executeUpdate();
    }
    
    
@@ -294,38 +295,39 @@ public class Cargador implements ModelSubject{
 			System.out.println("user:"+users.getString(2)+" || pass: "+users.getString(3));
        }
 	}
-       public void comprarEntrada(int idPelicula,String codCompra,String Fila,String Columna) throws SQLException{
-       cs = cn.getConnection().prepareCall("call comprarEntrada(?,?,?,?)");
-       cs.setInt(1, idPelicula);
-       cs.setString(2, codCompra);
-       cs.setString(3, Fila);
-       cs.setString(4, Columna);
+       public void comprarEntrada(int idPelicula,String codCompra,String Fila,int Columna) throws SQLException{
+       cs = cn.getConnection().prepareCall("call comprarPelicula(?,?,?,?)");
+       cs.setInt("idPelicula", idPelicula);
+       cs.setString("codCompra", codCompra);
+       cs.setString("fila", Fila);
+       cs.setInt("columna", Columna);
        cs.executeUpdate();
        
        }
         
         public int getIdAsiento(String Fila, int Columna){
-        if(Fila.equalsIgnoreCase("A")) return 1*8+Columna ;
-        if(Fila.equalsIgnoreCase("B")) return 2*8+Columna ;
-        if(Fila.equalsIgnoreCase("C")) return 3*8+Columna ;
-        if(Fila.equalsIgnoreCase("D")) return 4*8+Columna ;
-        if(Fila.equalsIgnoreCase("E")) return 5*8+Columna ;
-        if(Fila.equalsIgnoreCase("F")) return 6*8+Columna ;
-        if(Fila.equalsIgnoreCase("G")) return 7*8+Columna ;
-        if(Fila.equalsIgnoreCase("H")) return 8*8+Columna ;
-        if(Fila.equalsIgnoreCase("I")) return 9*8+Columna ;
-        if(Fila.equalsIgnoreCase("J")) return 10*8+Columna ;
+        if(Fila.equalsIgnoreCase("A")) return 0*8+Columna ;
+        if(Fila.equalsIgnoreCase("B")) return 1*8+Columna ;
+        if(Fila.equalsIgnoreCase("C")) return 2*8+Columna ;
+        if(Fila.equalsIgnoreCase("D")) return 3*8+Columna ;
+        if(Fila.equalsIgnoreCase("E")) return 4*8+Columna ;
+        if(Fila.equalsIgnoreCase("F")) return 5*8+Columna ;
+        if(Fila.equalsIgnoreCase("G")) return 6*8+Columna ;
+        if(Fila.equalsIgnoreCase("H")) return 7*8+Columna ;
+        if(Fila.equalsIgnoreCase("I")) return 8*8+Columna ;
+        if(Fila.equalsIgnoreCase("J")) return 9*8+Columna ;
         return 0;
         }
         
         public boolean estaOcupado(int idPelicula,int idAsiento) throws SQLException{
-        ps = cn.getConnection().prepareStatement("select * from asientospelicula where idAsiento = ? and idPelicula = ?");
+        	System.out.println(idPelicula+"---"+idAsiento);
+        ps = cn.getConnection().prepareStatement("select ocupado from entradasPelicula where idPelicula = ? and idAsiento = ?");
         ps.setInt(1, idPelicula);
         ps.setInt(2, idAsiento);
         rs= ps.executeQuery();
         int ocupado=0;
         while(rs.next()){
-        ocupado=rs.getInt(3);
+        ocupado=rs.getInt(1);
         }
         if (ocupado == 0)
             return false;

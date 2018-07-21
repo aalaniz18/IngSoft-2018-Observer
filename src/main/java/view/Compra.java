@@ -32,7 +32,7 @@ public class Compra extends javax.swing.JFrame{
         initComponents();
         setBoxStock();
         setBoxCompra();
-        setFilas("3h2ñ58wn");
+        setFilas(controller.getModel().getObjCompra().getCodigo());
     }
 
     /**
@@ -315,15 +315,16 @@ public class Compra extends javax.swing.JFrame{
             int id = controller.getModel().getIdRs(Stock, jComboBox1.getSelectedItem().toString());
             double precio = controller.getModel().getPrecio(id);
             int cantidad = Integer.parseInt(jComboBox2.getSelectedItem().toString());
+            
+            System.out.println(controller.getModel().getObjCompra().getCodigo());
 
-            controller.getModel().agregaItem("3h2ñ58wn",
-                    id,
+            controller.getModel().agregaItem(id,
                     jComboBox1.getSelectedItem().toString(),
                     cantidad,
                     precio,
-                    precio * cantidad);
+                    precio * cantidad, controller.getModel().getObjCompra().getCodigo());
             cleanRows();
-            setFilas("3h2ñ58wn");
+            setFilas(controller.getModel().getObjCompra().getCodigo());
             setBoxCompra();
         } catch (SQLException ex) {
             Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);

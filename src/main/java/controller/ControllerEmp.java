@@ -275,14 +275,25 @@ public class ControllerEmp implements ControllerInterface{
 	}
 
 	@Override
-	public boolean esDisponible(int id, String fila, int asiento) {
-		model.estaOcupado(id,fila,asiento);
+	public boolean esDisponible(int idPelicula, int idAsiento) {
+		try {
+			return model.estaOcupado(idPelicula,idAsiento);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
 	}
 
 	@Override
-	public void iniciarCompra(int id, int idAsiento) {
-		model.comprarEntrada(id,idAsiento);
-		model.setOcupado(id, idAsiento);
+	public void iniciarCompra(int idPelicula,String fila, int columna) {
+		String codigoCompra= model.getObjCompra().getCodigo();
+		try {
+			model.comprarEntrada(idPelicula, codigoCompra,fila,columna);
+			
+			model.setOcupado(idPelicula, model.getIdAsiento(fila, columna));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }
