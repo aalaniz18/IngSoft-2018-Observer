@@ -239,19 +239,20 @@ public class Cargador implements ModelSubject{
    
    public void finalizarCompra(String codCompra, double total, Date fecha, String descripcion) throws SQLException{
        ps = cn.getConnection().prepareStatement("insert into compras (codCompra,total,fecha,descripcion) values (?,?,?,?)");
-       ps.setString(0,codCompra);
-       ps.setDouble(1,total);
-       ps.setDate(2, (java.sql.Date) fecha);
-       ps.setString(3,descripcion);
+       ps.setString(1,codCompra);
+       ps.setDouble(2,total);
+       ps.setDate(3, (java.sql.Date) fecha);
+       ps.setString(4,descripcion);
        ps.executeUpdate();
    }
    
    public void setOcupado(String idPelicula,int idAsiento) throws SQLException{
        ps = cn.getConnection().prepareStatement("update entradasPelicula set ocupado = 1 where idPelicula=? and idAsiento=?");
-       ps.setString(0,idPelicula);
-       ps.setInt(0,idAsiento);
+       ps.setString(1,idPelicula);
+       ps.setInt(2,idAsiento);
        ps.executeUpdate();
    }
+   
    
    public ResultSet CargarStock() throws SQLException{
 		s = cn.getConnection().createStatement();
@@ -293,5 +294,43 @@ public class Cargador implements ModelSubject{
 			System.out.println("user:"+users.getString(2)+" || pass: "+users.getString(3));
        }
 	}
+       public void comprarEntrada(int idPelicula,String codCompra,String Fila,String Columna) throws SQLException{
+       cs = cn.getConnection().prepareCall("call comprarEntrada(?,?,?,?)");
+       cs.setInt(1, idPelicula);
+       cs.setString(2, codCompra);
+       cs.setString(3, Fila);
+       cs.setString(4, Columna);
+       cs.executeUpdate();
+       
+       }
+        
+        public int getIdAsiento(String Fila, int Columna){
+        if(Fila.equalsIgnoreCase("A")) return 1*8+Columna ;
+        if(Fila.equalsIgnoreCase("B")) return 2*8+Columna ;
+        if(Fila.equalsIgnoreCase("C")) return 3*8+Columna ;
+        if(Fila.equalsIgnoreCase("D")) return 4*8+Columna ;
+        if(Fila.equalsIgnoreCase("E")) return 5*8+Columna ;
+        if(Fila.equalsIgnoreCase("F")) return 6*8+Columna ;
+        if(Fila.equalsIgnoreCase("G")) return 7*8+Columna ;
+        if(Fila.equalsIgnoreCase("H")) return 8*8+Columna ;
+        if(Fila.equalsIgnoreCase("I")) return 9*8+Columna ;
+        if(Fila.equalsIgnoreCase("J")) return 10*8+Columna ;
+        return 0;
+        }
+        
+        public boolean estaOcupado(int idPelicula,int idAsiento) throws SQLException{
+        ps = cn.getConnection().prepareStatement("select * from asientospelicula where idAsiento = ? and idPelicula = ?");
+        ps.setInt(1, idPelicula);
+        ps.setInt(2, idAsiento);
+        rs= ps.executeQuery();
+        int ocupado=0;
+        while(rs.next()){
+        ocupado=rs.getInt(3);
+        }
+        if (ocupado == 0)
+            return false;
+                    else 
+            return true;
+        }
 	
 }
