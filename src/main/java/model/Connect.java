@@ -31,7 +31,7 @@ public class Connect {
            
            
          } catch (ClassNotFoundException ex) {
-            throw new ClassCastException(ex.getMessage());
+            //throw new ClassCastException(ex.getMessage());
          }
         }
         public Connection getConnection(){

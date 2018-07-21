@@ -4,6 +4,9 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import javax.swing.JOptionPane;
+
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 
@@ -23,6 +26,7 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     private javax.swing.JButton nextButton1;
     private javax.swing.JButton skipButton;
     ControllerInterface controller;
+    private int id;
     
     public CompraTickets_v1(ControllerInterface controller) throws SQLException {
     	this.controller=controller;
@@ -84,7 +88,7 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/400.400.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/view/400.400.jpg"))); // NOI18N
         jLabel3.setBorder(javax.swing.BorderFactory.createCompoundBorder());
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -208,15 +212,20 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
        }
 
     protected void chargeButtonActionPerformed(ActionEvent evt) throws SQLException {
-    	int i= controller.getModel().getIdPelicula((String) movieBox.getSelectedItem()); //falta idpelicula
-    	ResultSet asientos= controller.getModel().getAsientos(i);
-    	while(asientos.next()){
- //   		filaBox.addItem(asientos.getString(noseque numero va));
-//    		asientoBox.addItem(asientos.getString(nose que va));
-    	}
+    	String elegida = (String) movieBox.getSelectedItem();
+    	id= controller.getModel().getIdPelicula(elegida);
 	}
 
 	private void buyButtonActionPerformed(java.awt.event.ActionEvent evt) {
+		String fila= (String) filaBox.getSelectedItem();
+		int asiento= (Integer) asientoBox.getSelectedItem();
+		if(!controller.getModel().estaOcupado(id,fila,asiento)){
+        	JOptionPane.showMessageDialog(null, "Asiento ocupado, por favor seleccione otro.");
+		}
+		else{
+			controller.iniciarCompra(id, controller.getModel().getIdAsiento());
+        	JOptionPane.showMessageDialog(null, "Asiento reservado con exito.");
+		}	
     }
 
     private void filaBoxActionPerformed(java.awt.event.ActionEvent evt) {

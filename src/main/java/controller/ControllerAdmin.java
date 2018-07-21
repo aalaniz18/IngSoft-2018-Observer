@@ -239,5 +239,14 @@ public class ControllerAdmin implements ControllerInterface{
 	public ResultSet setPelisBox() {
 		return null;
 	}
+
+	@Override
+	public boolean esDisponible(int id, String fila, int asiento) {
+		return false;
+	}
+
+	@Override
+	public void iniciarCompra(int id,int idAsiento) {		
+	}
 	
 }

@@ -17,8 +17,8 @@ public class Principal {
 	public static void main (String[] args) throws SQLException {
 		Administrador A=Administrador.getInstancia("pepito", "1234");
 		Home h= new Home();
-		Cargador c= new Cargador();
-			//Tira error porque no se especifico el throw del mysql exception
+		Cargador c=new Cargador();
+		//Tira error porque no se especifico el throw del mysql exception
 		c.cargarAdmin(A.getUsuario(),A.getPass());
 		ControllerInterface controller = new ControllerCine(c,h);
 		h.cambiarController(controller);

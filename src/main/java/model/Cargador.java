@@ -213,10 +213,14 @@ public class Cargador implements ModelSubject{
    }
    
    public int getIdPelicula(String nomPelicula)throws SQLException{
-	   ps=cn.getConnection().prepareStatement("select id from peliculas where nomPelicula= ?");
+	   int id=0;
+	   ps=cn.getConnection().prepareStatement("select idPelicula from peliculas where nomPelicula= ?");
 	   ps.setString(1, nomPelicula);
 	   rs=ps.executeQuery();
-	   return rs.getInt(1);
+	   while(rs.next()){
+		   id=rs.getInt(1);
+	   }
+	   return id;
    }
    
    public ResultSet getCompraFinalizada(String codCompra) throws SQLException{

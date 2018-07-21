@@ -39,7 +39,7 @@ public class HomeCliente extends javax.swing.JFrame {
         jLabel1.setText("<html>Bienvenide al servicio de autogestion");
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/cinemax-rojo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/view/cinemax-rojo.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

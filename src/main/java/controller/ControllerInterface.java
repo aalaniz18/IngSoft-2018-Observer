@@ -89,4 +89,10 @@ public interface ControllerInterface {
 	ResultSet getRSStock();
 
 	ResultSet setPelisBox();
+	
+	boolean esDisponible(int id, String fila, int asiento);
+
+	void iniciarCompra(int id, int idAsiento);
+	
+	
 }

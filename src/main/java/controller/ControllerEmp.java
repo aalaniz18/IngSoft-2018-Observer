@@ -273,5 +273,16 @@ public class ControllerEmp implements ControllerInterface{
 			return null;
 		}
 	}
+
+	@Override
+	public boolean esDisponible(int id, String fila, int asiento) {
+		model.estaOcupado(id,fila,asiento);
+	}
+
+	@Override
+	public void iniciarCompra(int id, int idAsiento) {
+		model.comprarEntrada(id,idAsiento);
+		model.setOcupado(id, idAsiento);
+	}
 	
 }

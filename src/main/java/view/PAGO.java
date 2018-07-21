@@ -43,7 +43,7 @@ public class PAGO extends javax.swing.JFrame{
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/view/mercado-pago-banner.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/main/java/view/mercado-pago-banner.png"))); // NOI18N
 
         jLabel2.setText("NUMERO TARJETA");
 
