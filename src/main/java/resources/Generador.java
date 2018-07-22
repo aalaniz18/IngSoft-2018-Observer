@@ -12,7 +12,7 @@ public class Generador {
 	
 	public String creaCode(){
 		for(int i=0;i<8;i++){
-			int el = (int)(Math.random()*37);
+			int el = (int)(Math.random()*36);
 			conjunto[i] = (char)elementos[el];
 			}
 		return new String(conjunto);

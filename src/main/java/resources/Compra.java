@@ -6,6 +6,7 @@ public class Compra {
 	private FormaPago f;
 	private Codigo c;
 	private boolean necEmpleado;
+	private String fp;
 	
 	public Compra(){
 		total= 0.0;
@@ -25,10 +26,13 @@ public class Compra {
 	  segundo a Credito y tercero a Debito. */
 	public void	definirFormaPago(int i){
 		if(i==1){
+			fp= "Efectivo";
 			f= new Efectivo();}
-		if(i==2){
-			f= new Credito();}
 		if(i==3){
+			fp= "Credito";
+			f= new Credito();}
+		if(i==2){
+			fp= "Debito";
 			f= new Debito();}
 	}
 	
@@ -38,6 +42,23 @@ public class Compra {
 	
 	public String getCodigo(){
 		return c.getCode();
+	}
+	
+	public void resetCompra(){
+		total= 0.0;
+		necEmpleado=false;
+		genCodigo();
+		f=null;
+		fp=null;
+	}
+	
+	public String getformaPago(){
+		return fp;
+	}
+	
+	public int getEmpl(){
+		int ent= necEmpleado ? 1:0;
+		return ent;
 	}
 	
 }

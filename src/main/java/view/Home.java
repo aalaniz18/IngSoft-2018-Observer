@@ -97,12 +97,14 @@ public ControllerInterface controller;
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         controller.cambiarAHome2(this);
         main.java.resources.Compra c=new main.java.resources.Compra();
-        controller.getModel().GuardarCompra(c);
+       // controller.getModel().GuardarCompraCliente(c);
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
     	ControllerInterface cont=new ControllerEmp(controller.getModel(),this);
-    	cambiarController(cont);    	
+    	cambiarController(cont);
+    	main.java.resources.Compra c=new main.java.resources.Compra();
+        //controller.getModel().GuardarCompraEmpleado(c);
     	controller.cambiarALogin(this);   
     }
     

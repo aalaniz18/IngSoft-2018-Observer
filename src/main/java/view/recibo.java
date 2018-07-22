@@ -1,4 +1,6 @@
 package main.java.view;
+import javax.swing.JOptionPane;
+
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 
@@ -209,8 +211,10 @@ public class recibo extends javax.swing.JFrame {
     }//GEN-LAST:event_numeroCompraActionPerformed
 
     private void generarComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarComprobanteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_generarComprobanteActionPerformed
+        controller.getModel().getObjCompra().resetCompra();
+    	JOptionPane.showMessageDialog(null, "Compra realizada con exito");
+        controller.cambiarAHome2(this);
+    }
 
     private void DescripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DescripcionActionPerformed
         // TODO add your handling code here:

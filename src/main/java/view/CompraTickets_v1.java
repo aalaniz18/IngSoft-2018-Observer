@@ -34,28 +34,6 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setResizable(false);
-        
-        filaBox.removeAllItems();
-        filaBox.addItem("A");
-        filaBox.addItem("B");
-        filaBox.addItem("C");
-        filaBox.addItem("D");
-        filaBox.addItem("E");
-        filaBox.addItem("F");
-        filaBox.addItem("G");
-        filaBox.addItem("H");
-        filaBox.addItem("I");
-        filaBox.addItem("J");
-        
-        asientoBox.removeAllItems();
-        asientoBox.addItem("1");
-        asientoBox.addItem("2");
-        asientoBox.addItem("3");
-        asientoBox.addItem("4");
-        asientoBox.addItem("5");
-        asientoBox.addItem("6");
-        asientoBox.addItem("7");
-        asientoBox.addItem("8");
 
         setmovieBox();
         
@@ -91,14 +69,14 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
             }
         });
 
-        filaBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        filaBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         filaBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filaBoxActionPerformed(evt);
             }
         });
 
-        asientoBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        asientoBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
 
         jLabel1.setText("  FILA");
 
@@ -238,6 +216,27 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     protected void chargeButtonActionPerformed(ActionEvent evt) throws SQLException {
     	String elegida = (String) movieBox.getSelectedItem();
     	idPelicula= controller.getModel().getIdPelicula(elegida);
+        filaBox.removeAllItems();
+        filaBox.addItem("A");
+        filaBox.addItem("B");
+        filaBox.addItem("C");
+        filaBox.addItem("D");
+        filaBox.addItem("E");
+        filaBox.addItem("F");
+        filaBox.addItem("G");
+        filaBox.addItem("H");
+        filaBox.addItem("I");
+        filaBox.addItem("J");
+        
+        asientoBox.removeAllItems();
+        asientoBox.addItem("1");
+        asientoBox.addItem("2");
+        asientoBox.addItem("3");
+        asientoBox.addItem("4");
+        asientoBox.addItem("5");
+        asientoBox.addItem("6");
+        asientoBox.addItem("7");
+        asientoBox.addItem("8");
 	}
 
 	private void buyButtonActionPerformed(java.awt.event.ActionEvent evt)throws SQLException {

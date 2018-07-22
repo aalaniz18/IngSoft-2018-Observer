@@ -110,7 +110,9 @@ public class formaPago extends javax.swing.JFrame{
     }                                          
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        controller.cambiarAConfirma(this);
+        controller.getModel().getObjCompra().empleadoTrue();
+        controller.getModel().getObjCompra().definirFormaPago(1);
+    	controller.cambiarAConfirma(this);
     }                                          
 
     private void CredButonActionPerformed(java.awt.event.ActionEvent evt) {                                          

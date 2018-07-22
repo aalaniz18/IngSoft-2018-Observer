@@ -22,6 +22,7 @@ public class Compra extends javax.swing.JFrame{
 
     DefaultTableModel tablaCompra;
     ControllerInterface controller;
+    boolean carrito=false;
     
     public Compra(ControllerInterface controller) throws SQLException {
         this.controller=controller;
@@ -282,6 +283,10 @@ public class Compra extends javax.swing.JFrame{
 	}
 
 	protected void jButton5ActionPerformed(ActionEvent evt) {
+		if(carrito){
+			controller.getModel().getObjCompra().empleadoTrue();
+			System.out.println(controller.getModel().getObjCompra().getEmpl());
+		}
 		controller.cambiarAFormaPago(this);
 	}
 
@@ -310,7 +315,8 @@ public class Compra extends javax.swing.JFrame{
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
-        try {
+    	carrito=true;        	
+    	try {
             ResultSet Stock = controller.getModel().getCargaBox().CargarStock();
             int id = controller.getModel().getIdRs(Stock, jComboBox1.getSelectedItem().toString());
             double precio = controller.getModel().getPrecio(id);
