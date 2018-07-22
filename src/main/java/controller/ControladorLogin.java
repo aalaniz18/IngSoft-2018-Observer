@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import main.java.model.Cargador;
 import main.java.model.Login;
 import main.java.view.Home;
-import main.java.view.PAGO;
+import main.java.view.Pago;
 import main.java.view.FormaPago;
 
 

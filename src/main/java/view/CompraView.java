@@ -33,7 +33,7 @@ public class CompraView extends javax.swing.JFrame{
         initComponents();
         setBoxStock();
         setBoxCompra();
-        setFilas(controller.getModel().getObjCompra().getCodigo());
+        setFilas(controller.getCompraActual().getCodigo());
     }
 
     /**
@@ -288,9 +288,9 @@ public class CompraView extends javax.swing.JFrame{
 
 	protected void jButton5ActionPerformed(ActionEvent evt) throws SQLException {
 		if(carrito){
-			controller.getModel().getObjCompra().empleadoTrue();
+			controller.getCompraActual().empleadoTrue();
 			}
-		controller.getModel().finalizarCompra(controller.getModel().getObjCompra().getCodigo());
+		controller.getModel().finalizarCompra(controller.getCompraActual().getCodigo());
 		controller.cambiarAFormaPago(this);
 	}
 
@@ -326,15 +326,15 @@ public class CompraView extends javax.swing.JFrame{
             double precio = controller.getModel().getPrecio(id);
             int cantidad = Integer.parseInt(jComboBox2.getSelectedItem().toString());
             
-            System.out.println(controller.getModel().getObjCompra().getCodigo());
+            System.out.println(controller.getCompraActual().getCodigo());
 
             controller.getModel().agregaItem(id,
                     jComboBox1.getSelectedItem().toString(),
                     cantidad,
                     precio,
-                    precio * cantidad, controller.getModel().getObjCompra().getCodigo());
+                    precio * cantidad, controller.getCompraActual().getCodigo());
             cleanRows();
-            setFilas(controller.getModel().getObjCompra().getCodigo());
+            setFilas(controller.getCompraActual().getCodigo());
             setBoxCompra();
         } catch (SQLException ex) {
             Logger.getLogger(CompraView.class.getName()).log(Level.SEVERE, null, ex);

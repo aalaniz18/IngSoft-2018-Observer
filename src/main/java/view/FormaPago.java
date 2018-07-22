@@ -112,10 +112,11 @@ public class FormaPago extends javax.swing.JFrame{
     }                                          
 
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        controller.getModel().getObjCompra().empleadoTrue();
-        controller.getModel().getObjCompra().definirFormaPago(1);
+        controller.getCompraActual().empleadoTrue();
+        controller.getCompraActual().definirFormaPago(1);
         try {
-			controller.getModel().setEmpleado(1,"Efectivo", controller.getModel().getObjCompra().getCodigo());
+            controller.getCompraActual().setTotal(controller.getCompraActual().obtenerObjFormaPago().pagar(controller.getModel().getPrecioFinal(controller.getCompraActual().getCodigo())));
+        	controller.getModel().setEmpleado(1,"Efectivo", controller.getCompraActual().getCodigo());
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -124,6 +125,8 @@ public class FormaPago extends javax.swing.JFrame{
 
     private void CredButonActionPerformed(java.awt.event.ActionEvent evt) {                                          
         controller.cambiarAPago(this);
+        controller.getCompraActual().definirFormaPago(3);
+
     }
     
 }

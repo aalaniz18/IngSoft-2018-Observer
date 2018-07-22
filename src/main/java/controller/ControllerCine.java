@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import main.java.model.Cargador;
 import main.java.model.Connect;
+import main.java.resources.Compra;
 import main.java.view.CargaStock;
 import main.java.view.CompraView;
 import main.java.view.CompraTickets_v1;
@@ -15,7 +16,7 @@ import main.java.view.Home;
 import main.java.view.HomeAdmin;
 import main.java.view.HomeCliente;
 import main.java.view.Login;
-import main.java.view.PAGO;
+import main.java.view.Pago;
 import main.java.view.RecibirTiket;
 import main.java.view.FormaPago;
 import main.java.view.Recibo;
@@ -75,11 +76,11 @@ public class ControllerCine implements ControllerInterface{
 	
 	public void cambiarAPago(FormaPago fp) {//OK!
 		fp.setVisible(false);
-		PAGO p= new PAGO(this);
+		Pago p= new Pago(this);
 		p.setVisible(true);
 	}
 	
-	public void	cambiarAFormaPago(PAGO p) {//OK!
+	public void	cambiarAFormaPago(Pago p) {//OK!
 		p.setVisible(false);
 		FormaPago fp=new FormaPago(this);
 		fp.setVisible(true);
@@ -173,7 +174,7 @@ public class ControllerCine implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAConfirma(PAGO p) {//OK!
+	public void cambiarAConfirma(Pago p) {//OK!
 		p.setVisible(false);
 		Recibo r=new Recibo(this);
 		r.setVisible(true);
@@ -281,5 +282,9 @@ public class ControllerCine implements ControllerInterface{
 		}
 	}
 	
+	@Override
+	public Compra getCompraActual() {
+		return model.getObjCompraEmpleado();
+	}
 	
 }

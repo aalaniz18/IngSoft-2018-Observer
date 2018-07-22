@@ -40,6 +40,10 @@ public class Compra {
 		return total;
 	}
 	
+	public void setTotal(double t){
+		total=t;
+	}
+	
 	public String getCodigo(){
 		return c.getCode();
 	}
@@ -59,6 +63,10 @@ public class Compra {
 	public int getEmpl(){
 		int ent= necEmpleado ? 1:0;
 		return ent;
+	}
+	
+	public FormaPago obtenerObjFormaPago(){
+		return f;
 	}
 	
 }

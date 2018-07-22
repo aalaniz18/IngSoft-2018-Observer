@@ -215,7 +215,7 @@ public class Recibo extends javax.swing.JFrame {
     }//GEN-LAST:event_numeroCompraActionPerformed
 
     private void generarComprobanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generarComprobanteActionPerformed
-        controller.getModel().getObjCompra().resetCompra();
+        controller.getCompraActual().resetCompra();
     	JOptionPane.showMessageDialog(null, "Compra realizada con exito");
         controller.cambiarAHome2(this);
     }
@@ -241,7 +241,7 @@ public class Recibo extends javax.swing.JFrame {
     }//GEN-LAST:event_PagadoActionPerformed
     public void setText(){
     	try {
-			ResultSet compraFinalizada = controller.getModel().getCompraFinalizada(controller.getModel().getObjCompra().getCodigo());
+			ResultSet compraFinalizada = controller.getModel().getCompraFinalizada(controller.getCompraActual().getCodigo());
 			while(compraFinalizada.next()){
 				cobradoPor.setText("-");
 				Total.setText(compraFinalizada.getString(3));

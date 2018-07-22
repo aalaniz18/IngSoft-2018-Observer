@@ -224,18 +224,14 @@ public class Cargador implements ModelSubject{
 	   }
 	   return id;
    }
-   
-
-   
+      
    public ResultSet getRecibo(String codCompra) throws SQLException{
        ps = cn.getConnection().prepareStatement("select * from compraactual where codCompra = ?");
        ps.setString(0,codCompra);
        rs = ps.executeQuery();
        return rs;
    }
-   
-  
-   
+      
    public void setOcupado(int idPelicula,int idAsiento) throws SQLException{
        //int idAsiento= this.getIdAsiento(fila, columna);
        cs = cn.getConnection().prepareCall("call setOcupado(?,?)");
@@ -243,8 +239,7 @@ public class Cargador implements ModelSubject{
        cs.setInt("p_idAsiento",idAsiento);
        cs.executeUpdate();
    }
-   
-   
+      
    public ResultSet CargarStock() throws SQLException{
 		s = cn.getConnection().createStatement();
 		rs = s.executeQuery("select * from productos");
@@ -257,9 +252,7 @@ public class Cargador implements ModelSubject{
 		rs = ps.executeQuery();
 		return rs;
 	}
-
 	
-	//corregir nombres (o no)
 	public void GuardarCompra(Compra objCompra){
 		compraCliente.add(objCompra);
 	}
@@ -362,6 +355,7 @@ public class Cargador implements ModelSubject{
 	        }
         	return text;
         	}
+        
         public double getPrecioFinal(String codCompra) throws SQLException{
         double preciofinal=0.0;
         ps = cn.getConnection().prepareStatement("select precFinal from compraactual where codigoCompra=?");

@@ -4,6 +4,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import main.java.model.Cargador;
+import main.java.resources.Compra;
 import main.java.view.CargaStock;
 import main.java.view.CompraView;
 import main.java.view.CompraTickets_v1;
@@ -13,7 +14,7 @@ import main.java.view.Home;
 import main.java.view.HomeAdmin;
 import main.java.view.HomeCliente;
 import main.java.view.Login;
-import main.java.view.PAGO;
+import main.java.view.Pago;
 import main.java.view.RecibirTiket;
 import main.java.view.FormaPago;
 import main.java.view.Recibo;
@@ -57,7 +58,7 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAFormaPago(PAGO p) {//OK!
+	public void cambiarAFormaPago(Pago p) {//OK!
 	}
 
 	@Override
@@ -150,7 +151,7 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAConfirma(PAGO p) {//OK!
+	public void cambiarAConfirma(Pago p) {//OK!
 	}
 
 	@Override
@@ -247,6 +248,11 @@ public class ControllerAdmin implements ControllerInterface{
 
 	@Override
 	public void iniciarCompra(int idPelicula, String fila, int columna) {		
+	}
+
+	@Override
+	public Compra getCompraActual() {
+		return null;
 	}
 	
 }

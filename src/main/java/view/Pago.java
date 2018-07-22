@@ -2,10 +2,10 @@ package main.java.view;
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 
-public class PAGO extends javax.swing.JFrame{
+public class Pago extends javax.swing.JFrame{
 	ControllerInterface controller;
 	
-    public PAGO(ControllerInterface controller) {
+    public Pago(ControllerInterface controller) {
     	this.controller=controller;
         initComponents();
         this.setLocationRelativeTo(null);

@@ -265,7 +265,6 @@ public class CompraTickets_v1 extends javax.swing.JFrame {
     
     private void nextButton1ActionPerformed(java.awt.event.ActionEvent evt) {
     	controller.cambiarACompra(this);
-    	//falta agregar a la compra
     }
     
     private void setmovieBox() throws SQLException{
