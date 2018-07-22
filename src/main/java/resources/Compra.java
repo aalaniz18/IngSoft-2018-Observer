@@ -5,7 +5,7 @@ public class Compra {
 	private double total;
 	private FormaPago f;
 	private Codigo c;
-	private boolean necEmpleado;
+	public boolean necEmpleado;
 	private String fp;
 	
 	public Compra(){
