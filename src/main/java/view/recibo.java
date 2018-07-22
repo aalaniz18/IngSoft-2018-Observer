@@ -1,4 +1,7 @@
 package main.java.view;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import javax.swing.JOptionPane;
 
 import main.java.controller.*;
@@ -29,6 +32,7 @@ public class recibo extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setResizable(false);
+        setText();
     }
 	 
 	 private void initComponents() {
@@ -235,7 +239,25 @@ public class recibo extends javax.swing.JFrame {
     private void PagadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagadoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_PagadoActionPerformed
-
+    public void setText(){
+    	try {
+			ResultSet compraFinalizada = controller.getModel().getCompraFinalizada(controller.getModel().getObjCompra().getCodigo());
+			while(compraFinalizada.next()){
+				cobradoPor.setText("-");
+				Total.setText(compraFinalizada.getString(3));
+				metodoPago.setText(compraFinalizada.getString(6));
+				numeroCompra.setText(compraFinalizada.getString(1));
+				Fecha.setText(compraFinalizada.getString(4));
+				Descripcion.setText(compraFinalizada.getString(2));
+				Pagado.setText("-");
+				
+				
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+    	
+    }
 //    /**
 //     * @param args the command line arguments
 //     */
