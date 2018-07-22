@@ -2,7 +2,7 @@ package main.java.view;
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 
-public class formaPago extends javax.swing.JFrame{
+public class FormaPago extends javax.swing.JFrame{
 	
 	ControllerInterface	controller;
 	private javax.swing.JButton CredButon;
@@ -12,7 +12,7 @@ public class formaPago extends javax.swing.JFrame{
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
    
-    public formaPago(ControllerInterface controller) {
+    public FormaPago(ControllerInterface controller) {
         this.controller=controller;
     	initComponents();
         this.setLocationRelativeTo(null);

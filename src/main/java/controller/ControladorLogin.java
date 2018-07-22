@@ -6,7 +6,7 @@ import main.java.model.Cargador;
 import main.java.model.Login;
 import main.java.view.Home;
 import main.java.view.PAGO;
-import main.java.view.formaPago;
+import main.java.view.FormaPago;
 
 
 public class ControladorLogin{

@@ -7,7 +7,7 @@ import javax.swing.JOptionPane;
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 
-public class recibo extends javax.swing.JFrame {
+public class Recibo extends javax.swing.JFrame {
 	
 	private javax.swing.JTextField Descripcion;
 	private javax.swing.JTextField Fecha;
@@ -26,7 +26,7 @@ public class recibo extends javax.swing.JFrame {
 	private javax.swing.JTextField numeroCompra;
 	ControllerInterface controller;
 	
-	 public recibo(ControllerInterface controller) {
+	 public Recibo(ControllerInterface controller) {
 		this.controller=controller;
         initComponents();
         this.setLocationRelativeTo(null);

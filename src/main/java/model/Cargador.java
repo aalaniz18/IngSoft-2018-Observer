@@ -23,12 +23,14 @@ public class Cargador implements ModelSubject{
     ResultSet rs ;
     PreparedStatement ps;
     Statement s ;
-    ArrayList<Compra> compra;
+    ArrayList<Compra> compraEmpleado;
+    ArrayList<Compra> compraCliente;
     CargaBox cb;
     
 	public Cargador() throws SQLException{
 		observers= new ArrayList<ViewObserver>();
-		compra=new ArrayList<Compra>();
+		compraEmpleado=new ArrayList<Compra>();
+		compraCliente=new ArrayList<Compra>();
         cn = new Connect();
         cb= new CargaBox();           
 	}
@@ -257,13 +259,19 @@ public class Cargador implements ModelSubject{
 	}
 
 	
-	
+	//corregir nombres (o no)
 	public void GuardarCompra(Compra objCompra){
-		compra.add(objCompra);
+		compraCliente.add(objCompra);
+	}
+	public void GuardarCompraEmpleado(Compra objCompra){
+		compraEmpleado.add(objCompra);
 	}
 	
 	public Compra getObjCompra(){
-		return compra.get(0);
+		return compraCliente.get(0);
+	}
+	public Compra getObjCompraEmpleado(){
+		return compraEmpleado.get(0);
 	}
 	
 	public ResultSet getUsuarios() throws SQLException{

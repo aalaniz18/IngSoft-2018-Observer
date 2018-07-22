@@ -18,13 +18,13 @@ import main.java.model.CargaBox;
 import main.java.model.Cargador;
 import main.java.resources.Generador;
 
-public class Compra extends javax.swing.JFrame{
+public class CompraView extends javax.swing.JFrame{
 
     DefaultTableModel tablaCompra;
     ControllerInterface controller;
     boolean carrito=false;
     
-    public Compra(ControllerInterface controller) throws SQLException {
+    public CompraView(ControllerInterface controller) throws SQLException {
         this.controller=controller;
     	tablaCompra = new DefaultTableModel(null, getColumnas());
         ///////////////////////
@@ -310,7 +310,7 @@ public class Compra extends javax.swing.JFrame{
         try {
             setTextBoxs();        // TODO add your handling code here:
         } catch (SQLException ex) {
-            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompraView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -333,7 +333,7 @@ public class Compra extends javax.swing.JFrame{
             setFilas(controller.getModel().getObjCompra().getCodigo());
             setBoxCompra();
         } catch (SQLException ex) {
-            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompraView.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -347,7 +347,7 @@ public class Compra extends javax.swing.JFrame{
         try {
             setBoxCompra();
         } catch (SQLException ex) {
-            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CompraView.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 

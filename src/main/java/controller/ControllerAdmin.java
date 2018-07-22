@@ -5,18 +5,18 @@ import java.sql.SQLException;
 
 import main.java.model.Cargador;
 import main.java.view.CargaStock;
-import main.java.view.Compra;
+import main.java.view.CompraView;
 import main.java.view.CompraTickets_v1;
 import main.java.view.ConsultaStock;
-import main.java.view.GenerarCompra;
+import main.java.view.HomeEmpleado;
 import main.java.view.Home;
 import main.java.view.HomeAdmin;
 import main.java.view.HomeCliente;
 import main.java.view.Login;
 import main.java.view.PAGO;
 import main.java.view.RecibirTiket;
-import main.java.view.formaPago;
-import main.java.view.recibo;
+import main.java.view.FormaPago;
+import main.java.view.Recibo;
 import main.java.view.*;
 
 public class ControllerAdmin implements ControllerInterface{
@@ -53,7 +53,7 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAPago(formaPago fp) {//OK!
+	public void cambiarAPago(FormaPago fp) {//OK!
 	}
 
 	@Override
@@ -118,23 +118,23 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAPelicula(GenerarCompra gc) {//OK!
+	public void cambiarAPelicula(HomeEmpleado gc) {//OK!
 	}
 
 	@Override
-	public void cambiarAHome(GenerarCompra gc) {//OK!
+	public void cambiarAHome(HomeEmpleado gc) {//OK!
 	}
 
 	@Override
-	public void cambiarAFormaPago(Compra c) {//OK!
+	public void cambiarAFormaPago(CompraView c) {//OK!
 	}
 
 	@Override
-	public void cambiarACompraTickets(Compra c) {//OK!
+	public void cambiarACompraTickets(CompraView c) {//OK!
 	}
 
 	@Override
-	public void cambiarACompra(formaPago fp) {//OK!
+	public void cambiarACompra(FormaPago fp) {//OK!
 	}
 
 	@Override
@@ -146,7 +146,7 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAConfirma(formaPago fp) {//OK!	
+	public void cambiarAConfirma(FormaPago fp) {//OK!	
 	}
 
 	@Override
@@ -154,11 +154,11 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAFormaPago(recibo r) {//OK!
+	public void cambiarAFormaPago(Recibo r) {//OK!
 	}
 
 	@Override
-	public void cambiarAHome2(recibo r) {//OK!
+	public void cambiarAHome2(Recibo r) {//OK!
 	}
 	
 	@Override
@@ -166,7 +166,7 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 	
 	@Override
-	public void cambiarARecTick(GenerarCompra gc) {//OK!
+	public void cambiarARecTick(HomeEmpleado gc) {//OK!
 	}
 	
 	@Override

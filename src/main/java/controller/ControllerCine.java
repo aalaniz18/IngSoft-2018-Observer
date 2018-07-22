@@ -7,18 +7,18 @@ import java.sql.SQLException;
 import main.java.model.Cargador;
 import main.java.model.Connect;
 import main.java.view.CargaStock;
-import main.java.view.Compra;
+import main.java.view.CompraView;
 import main.java.view.CompraTickets_v1;
 import main.java.view.ConsultaStock;
-import main.java.view.GenerarCompra;
+import main.java.view.HomeEmpleado;
 import main.java.view.Home;
 import main.java.view.HomeAdmin;
 import main.java.view.HomeCliente;
 import main.java.view.Login;
 import main.java.view.PAGO;
 import main.java.view.RecibirTiket;
-import main.java.view.formaPago;
-import main.java.view.recibo;
+import main.java.view.FormaPago;
+import main.java.view.Recibo;
 import main.java.model.*;
 //import java.sql.SQLException;
 //import java.util.logging.Level;
@@ -56,9 +56,9 @@ public class ControllerCine implements ControllerInterface{
 	@Override
 	public void cambiarACompra(CompraTickets_v1 ct) {//OK!
 		ct.setVisible(false);
-		Compra c;
+		CompraView c;
 		try {
-			c = new Compra(this);
+			c = new CompraView(this);
 		} catch (SQLException e) {
 			c=null;
 			e.printStackTrace();
@@ -67,13 +67,13 @@ public class ControllerCine implements ControllerInterface{
 	}
 	
 	@Override
-	public void cambiarAFormaPago(Compra c) {//OK!
+	public void cambiarAFormaPago(CompraView c) {//OK!
 		c.setVisible(false);
-		formaPago fp= new formaPago(this);
+		FormaPago fp= new FormaPago(this);
 		fp.setVisible(true);
 	}
 	
-	public void cambiarAPago(formaPago fp) {//OK!
+	public void cambiarAPago(FormaPago fp) {//OK!
 		fp.setVisible(false);
 		PAGO p= new PAGO(this);
 		p.setVisible(true);
@@ -81,16 +81,16 @@ public class ControllerCine implements ControllerInterface{
 	
 	public void	cambiarAFormaPago(PAGO p) {//OK!
 		p.setVisible(false);
-		formaPago fp=new formaPago(this);
+		FormaPago fp=new FormaPago(this);
 		fp.setVisible(true);
 	}
 	
 	@Override
-	public void cambiarACompra(formaPago fp) {//OK!
+	public void cambiarACompra(FormaPago fp) {//OK!
 		fp.setVisible(false);
-		Compra c;
+		CompraView c;
 		try {
-			c = new Compra(this);
+			c = new CompraView(this);
 		} catch (SQLException e) {
 			c=null;
 			e.printStackTrace();
@@ -99,7 +99,7 @@ public class ControllerCine implements ControllerInterface{
 	}
 	
 	@Override
-	public void cambiarACompraTickets(Compra c) {//OK!
+	public void cambiarACompraTickets(CompraView c) {//OK!
 		c.setVisible(false);
 		CompraTickets_v1 ct;
 		try {
@@ -158,36 +158,36 @@ public class ControllerCine implements ControllerInterface{
 	}
 	
 	@Override
-	public void cambiarAPelicula(GenerarCompra gc) {//OK!
+	public void cambiarAPelicula(HomeEmpleado gc) {//OK!
 	}
 
 	@Override
-	public void cambiarAHome(GenerarCompra gc) {//OK!
+	public void cambiarAHome(HomeEmpleado gc) {//OK!
 	}
 
 	@Override
-	public void cambiarAConfirma(formaPago fp) {
+	public void cambiarAConfirma(FormaPago fp) {
 		fp.setVisible(false);
-		recibo r=new recibo(this);
+		Recibo r=new Recibo(this);
 		r.setVisible(true);
 	}
 
 	@Override
 	public void cambiarAConfirma(PAGO p) {//OK!
 		p.setVisible(false);
-		recibo r=new recibo(this);
+		Recibo r=new Recibo(this);
 		r.setVisible(true);
 	}
 	
 	@Override
-	public void cambiarAFormaPago(recibo r) {//OK!
+	public void cambiarAFormaPago(Recibo r) {//OK!
 		r.setVisible(false);
-		formaPago fp=new formaPago(this);
+		FormaPago fp=new FormaPago(this);
 		fp.setVisible(true);
 	}
 
 	@Override
-	public void cambiarAHome2(recibo r) {//OK!
+	public void cambiarAHome2(Recibo r) {//OK!
 		r.setVisible(false);
 		HomeCliente hc= new HomeCliente(this);
 		hc.setVisible(true);
@@ -207,7 +207,7 @@ public class ControllerCine implements ControllerInterface{
 	}	
 	
 	@Override
-	public void cambiarARecTick(GenerarCompra gc) {//OK!
+	public void cambiarARecTick(HomeEmpleado gc) {//OK!
 	}
 	
 	@Override

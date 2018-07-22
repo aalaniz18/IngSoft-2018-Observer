@@ -4,18 +4,18 @@ import java.sql.SQLException;
 
 import main.java.model.Cargador;
 import main.java.view.CargaStock;
-import main.java.view.Compra;
+import main.java.view.CompraView;
 import main.java.view.CompraTickets_v1;
 import main.java.view.ConsultaStock;
-import main.java.view.GenerarCompra;
+import main.java.view.HomeEmpleado;
 import main.java.view.Home;
 import main.java.view.HomeAdmin;
 import main.java.view.HomeCliente;
 import main.java.view.Login;
 import main.java.view.PAGO;
 import main.java.view.RecibirTiket;
-import main.java.view.formaPago;
-import main.java.view.recibo;
+import main.java.view.FormaPago;
+import main.java.view.Recibo;
 import main.java.view.*;
 
 public class ControllerEmp implements ControllerInterface{
@@ -51,12 +51,12 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAHome2(Login l) {//OK!
 		l.setVisible(false);
-		GenerarCompra gc =new GenerarCompra(this,this.getModel());
+		HomeEmpleado gc =new HomeEmpleado(this,this.getModel());
 		gc.setVisible(true);	
 	}
 	
 	@Override
-	public void cambiarAHome(GenerarCompra gc) {//OK!
+	public void cambiarAHome(HomeEmpleado gc) {//OK!
 		gc.setVisible(false);
 		Home h= new Home();
 		h.cambiarController(this);
@@ -67,7 +67,7 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAHome2(CompraTickets_v1 ct) {
 		ct.setVisible(false);
-		GenerarCompra gc =new GenerarCompra(this,this.getModel());
+		HomeEmpleado gc =new HomeEmpleado(this,this.getModel());
 		gc.setVisible(true);
 	}
 
@@ -76,7 +76,7 @@ public class ControllerEmp implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarACompraTickets(Compra c) {//OK!
+	public void cambiarACompraTickets(CompraView c) {//OK!
 		c.setVisible(false);
 		CompraTickets_v1 ct;
 		try {
@@ -89,7 +89,7 @@ public class ControllerEmp implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAPago(formaPago fp) {//OK!
+	public void cambiarAPago(FormaPago fp) {//OK!
 		fp.setVisible(false);
 		PAGO p= new PAGO(this);
 		p.setVisible(true);
@@ -98,7 +98,7 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAFormaPago(PAGO p) {//OK!
 		p.setVisible(false);
-		formaPago fp=new formaPago(this);
+		FormaPago fp=new FormaPago(this);
 		fp.setVisible(true);
 	}
 
@@ -138,18 +138,18 @@ public class ControllerEmp implements ControllerInterface{
 		}
 
 	@Override
-	public void cambiarAFormaPago(Compra c) {//OK!
+	public void cambiarAFormaPago(CompraView c) {//OK!
 		c.setVisible(false);
-		formaPago fp= new formaPago(this);
+		FormaPago fp= new FormaPago(this);
 		fp.setVisible(true);
 	}
 
 	@Override
-	public void cambiarACompra(formaPago fp) {//OK!
+	public void cambiarACompra(FormaPago fp) {//OK!
 		fp.setVisible(false);
-		Compra c;
+		CompraView c;
 		try {
-			c = new Compra(this);
+			c = new CompraView(this);
 		} catch (SQLException e) {
 			e.printStackTrace();
 			c=null;
@@ -160,9 +160,9 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarACompra(CompraTickets_v1 ct) {//OK!
 		ct.setVisible(false);
-		Compra c;
+		CompraView c;
 		try {
-			c = new Compra(this);
+			c = new CompraView(this);
 		} catch (SQLException e) {
 			c=null;
 			e.printStackTrace();
@@ -171,7 +171,7 @@ public class ControllerEmp implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAPelicula(GenerarCompra gc) {
+	public void cambiarAPelicula(HomeEmpleado gc) {
 		gc.setVisible(false);
 		CompraTickets_v1 ct;
 		try {
@@ -184,30 +184,30 @@ public class ControllerEmp implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarAConfirma(formaPago fp) {
+	public void cambiarAConfirma(FormaPago fp) {
 		fp.setVisible(false);
-		recibo r=new recibo(this);
+		Recibo r=new Recibo(this);
 		r.setVisible(true);
 	}
 
 	@Override
 	public void cambiarAConfirma(PAGO p) {//OK!
 		p.setVisible(false);
-		recibo r=new recibo(this);
+		Recibo r=new Recibo(this);
 		r.setVisible(true);
 	}
 
 	@Override
-	public void cambiarAFormaPago(recibo r) {//OK!
+	public void cambiarAFormaPago(Recibo r) {//OK!
 		r.setVisible(false);
-		formaPago fp=new formaPago(this);
+		FormaPago fp=new FormaPago(this);
 		fp.setVisible(true);
 	}
 
 	@Override
-	public void cambiarAHome2(recibo r) {//OK!
+	public void cambiarAHome2(Recibo r) {//OK!
 		r.setVisible(false);
-		GenerarCompra gc= new GenerarCompra(this,this.getModel());
+		HomeEmpleado gc= new HomeEmpleado(this,this.getModel());
 		gc.setVisible(true);
 	}
 	
@@ -216,7 +216,7 @@ public class ControllerEmp implements ControllerInterface{
 	}
 
 	@Override
-	public void cambiarARecTick(GenerarCompra gc) {
+	public void cambiarARecTick(HomeEmpleado gc) {
 		gc.setVisible(false);
 		RecibirTiket rt= new RecibirTiket(this);
 		rt.setVisible(true);
@@ -225,7 +225,7 @@ public class ControllerEmp implements ControllerInterface{
 	@Override
 	public void cambiarAHomeEmpleado(RecibirTiket rt) {
 		rt.setVisible(false);
-		GenerarCompra gc= new GenerarCompra(this,this.getModel());
+		HomeEmpleado gc= new HomeEmpleado(this,this.getModel());
 		gc.setVisible(true);
 	}
 

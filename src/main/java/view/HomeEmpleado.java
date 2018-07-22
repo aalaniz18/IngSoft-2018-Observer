@@ -13,7 +13,7 @@ import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 import main.java.model.Cargador;
 
-public class GenerarCompra extends javax.swing.JFrame implements ViewObserver{
+public class HomeEmpleado extends javax.swing.JFrame implements ViewObserver{
 	
 	ControllerInterface controller;
 	Cargador model;
@@ -26,7 +26,7 @@ public class GenerarCompra extends javax.swing.JFrame implements ViewObserver{
     private javax.swing.JTable jTable1;
     
 	
-    public GenerarCompra(ControllerInterface controller,Cargador model) {
+    public HomeEmpleado(ControllerInterface controller,Cargador model) {
     	this.controller=controller;
     	this.model=model;
         initComponents();
