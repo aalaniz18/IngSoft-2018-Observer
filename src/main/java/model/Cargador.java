@@ -223,12 +223,7 @@ public class Cargador implements ModelSubject{
 	   return id;
    }
    
-   public ResultSet getCompraFinalizada(String codCompra) throws SQLException{
-       ps = cn.getConnection().prepareStatement("select * from comprasfinalizadas where codCompra = ?");
-       ps.setString(0,codCompra);
-       rs = ps.executeQuery();
-       return rs;
-   }
+
    
    public ResultSet getRecibo(String codCompra) throws SQLException{
        ps = cn.getConnection().prepareStatement("select * from compraactual where codCompra = ?");
@@ -237,14 +232,7 @@ public class Cargador implements ModelSubject{
        return rs;
    }
    
-   public void finalizarCompra(String codCompra, double total, Date fecha, String descripcion) throws SQLException{
-       ps = cn.getConnection().prepareStatement("insert into compras (codCompra,total,fecha,descripcion) values (?,?,?,?)");
-       ps.setString(1,codCompra);
-       ps.setDouble(2,total);
-       ps.setDate(3, (java.sql.Date) fecha);
-       ps.setString(4,descripcion);
-       ps.executeUpdate();
-   }
+  
    
    public void setOcupado(int idPelicula,int idAsiento) throws SQLException{
        //int idAsiento= this.getIdAsiento(fila, columna);
@@ -268,12 +256,7 @@ public class Cargador implements ModelSubject{
 		return rs;
 	}
 
-	public ResultSet GenerarRecibo(String codCompra) throws SQLException{
-		ps = cn.getConnection().prepareStatement("select * from recibos where codCompra = ?");
-		ps.setString(1, codCompra);
-		rs= ps.executeQuery();
-		return rs;
-	}
+	
 	
 	public void GuardarCompra(Compra objCompra){
 		compra.add(objCompra);
@@ -333,6 +316,80 @@ public class Cargador implements ModelSubject{
             return false;
                     else 
             return true;
+        }
+        
+        //metodos de finalizar compra
+        //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+        
+        
+        public void finalizarCompra(String codCompra) throws SQLException{
+            ps = cn.getConnection().prepareStatement("call finalizarCompra(?,?,?,?)");
+            ps.setString(1,codCompra);
+            ps.setString(2, this.getDescVenta(codCompra));
+            ps.setDouble(3, this.getPrecioFinal(codCompra));
+            ps.setDate(4,(java.sql.Date) getFecha());
+            ps.executeUpdate();
+        }
+        
+        public ResultSet GenerarRecibo(String codCompra) throws SQLException{
+    		ps = cn.getConnection().prepareStatement("select * from recibos where codCompra = ?");
+    		ps.setString(1, codCompra);
+    		rs= ps.executeQuery();
+    		return rs;
+    	}
+        
+        public ResultSet getCompraFinalizada(String codCompra) throws SQLException{
+            ps = cn.getConnection().prepareStatement("select * from comprasfinalizadas where codigoCompra = ?");
+            ps.setString(1,codCompra);
+            rs = ps.executeQuery();
+            return rs;
+        }
+        public String getDescVenta(String codCompra) throws SQLException{
+			ps = cn.getConnection().prepareStatement("select descProd from compraactual where codigoCompra = ?");
+	        ps.setString(1,codCompra);
+	        rs = ps.executeQuery();
+	        String text="";
+	        while(rs.next()){
+	        	text= text + rs.getString(1);	        	
+	        }
+        	return text;
+        	}
+        public double getPrecioFinal(String codCompra) throws SQLException{
+        double preciofinal=0.0;
+        ps = cn.getConnection().prepareStatement("select precFinal from compraactual where codigoCompra=?");
+        ps.setString(1,codCompra);
+        rs = ps.executeQuery();
+        while(rs.next()){
+        	preciofinal = preciofinal + rs.getDouble(1)    ;    	
+        }
+        	return preciofinal;
+        }
+        
+        public Date getFecha()throws SQLException{
+        	Date fec=null;
+        	s = cn.getConnection().createStatement();
+        	rs = s.executeQuery("select SYSDATE()");
+        	while(rs.next()){
+        		fec = rs.getDate(1);
+        	}
+        	return fec;
+        }
+        public Date getFechaCompra(String codCompra)throws SQLException{
+        	Date fec=null;
+        	ps = cn.getConnection().prepareStatement("select HoraVenta from comprasfinalizadas where codigoCompra = ?");
+        	ps.setString(1, codCompra);
+        	rs = ps.executeQuery();
+        	while(rs.next()){
+        		fec = rs.getDate(1);
+        	}
+        	return fec;
+        	}
+        public void setEmpleado(int empleado,String formaPago,String codCompra) throws SQLException{
+        	cs = cn.getConnection().prepareCall("call setTipoCompra(?,?,?)");
+        	cs.setInt(1, empleado);
+        	cs.setString(2, formaPago);
+        	cs.setString(3, codCompra);
+        	cs.executeUpdate();
         }
 	
 }
