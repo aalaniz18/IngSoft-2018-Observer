@@ -1,4 +1,6 @@
 package main.java.view;
+import java.sql.SQLException;
+
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
 
@@ -112,6 +114,11 @@ public class FormaPago extends javax.swing.JFrame{
     private void cashButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         controller.getModel().getObjCompra().empleadoTrue();
         controller.getModel().getObjCompra().definirFormaPago(1);
+        try {
+			controller.getModel().setEmpleado(1,"Efectivo", controller.getModel().getObjCompra().getCodigo());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     	controller.cambiarAConfirma(this);
     }                                          
 

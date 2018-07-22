@@ -331,12 +331,12 @@ public class Cargador implements ModelSubject{
         
         
         public void finalizarCompra(String codCompra) throws SQLException{
-            ps = cn.getConnection().prepareStatement("call finalizarCompra(?,?,?,?)");
-            ps.setString(1,codCompra);
-            ps.setString(2, this.getDescVenta(codCompra));
-            ps.setDouble(3, this.getPrecioFinal(codCompra));
-            ps.setDate(4,(java.sql.Date) getFecha());
-            ps.executeUpdate();
+            cs = cn.getConnection().prepareCall("call finalizarCompra(?,?,?,?)");
+            cs.setString("codCompra",codCompra);
+            cs.setString("descCompra", this.getDescVenta(codCompra));
+            cs.setDouble("totalPrecio", this.getPrecioFinal(codCompra));
+            cs.setDate("fechasys",(java.sql.Date) getFecha());
+            cs.executeUpdate();
         }
         
         public ResultSet GenerarRecibo(String codCompra) throws SQLException{

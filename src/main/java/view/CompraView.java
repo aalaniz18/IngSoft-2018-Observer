@@ -164,7 +164,11 @@ public class CompraView extends javax.swing.JFrame{
         jButton5.setText("FINALIZAR");
         jButton5.addActionListener(new java.awt.event.ActionListener(){
         	public void actionPerformed(java.awt.event.ActionEvent evt){
-        		jButton5ActionPerformed(evt);
+        		try {
+					jButton5ActionPerformed(evt);
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
         	}
         });
 
@@ -282,11 +286,11 @@ public class CompraView extends javax.swing.JFrame{
     	controller.cambiarACompraTickets(this);
 	}
 
-	protected void jButton5ActionPerformed(ActionEvent evt) {
+	protected void jButton5ActionPerformed(ActionEvent evt) throws SQLException {
 		if(carrito){
 			controller.getModel().getObjCompra().empleadoTrue();
-			System.out.println(controller.getModel().getObjCompra().getEmpl());
-		}
+			}
+		controller.getModel().finalizarCompra(controller.getModel().getObjCompra().getCodigo());
 		controller.cambiarAFormaPago(this);
 	}
 
