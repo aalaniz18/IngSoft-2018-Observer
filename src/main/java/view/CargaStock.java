@@ -4,12 +4,13 @@ import main.java.controller.ControllerInterface;
 import main.java.model.Cargador;
 import main.java.model.ModelSubject;
 
+import java.awt.HeadlessException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-public class CargaStock extends javax.swing.JFrame {
+public class CargaStock extends javax.swing.JFrame implements ViewObserver{
 	
 	private String BoxSelect;
 	private String BoxSelect2;
@@ -19,8 +20,10 @@ public class CargaStock extends javax.swing.JFrame {
 	ResultSet rs ;
     Statement s ;
     ControllerInterface controller;
+    ModelSubject subject;
     
-    public CargaStock(ControllerInterface controller){// throws SQLException {
+    public CargaStock(ControllerInterface controller, ModelSubject subject){// throws SQLException {
+    	this.subject=subject;
     	this.controller=controller;
         initComponents();
         setBoxs();
@@ -76,7 +79,15 @@ public class CargaStock extends javax.swing.JFrame {
         jButton1.setText("AGREGAR");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                AgregarStock(evt);
+                try {
+					AgregarStock(evt);
+				} catch (HeadlessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -92,7 +103,15 @@ public class CargaStock extends javax.swing.JFrame {
         jButton2.setText("QUITAR");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                try {
+					jButton2ActionPerformed(evt);
+				} catch (HeadlessException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
             }
         });
 
@@ -330,37 +349,42 @@ public class CargaStock extends javax.swing.JFrame {
         );
 
         pack();
+        subject.registerObserver(this);
     }                        
 
 //    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
 //         this.BoxSelect=(String) jComboBox1.getSelectedItem();
 //    }
 
-    private void AgregarStock(java.awt.event.ActionEvent evt) {//jbutton1ActionPerformed //Para probar!
+    private void AgregarStock(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {//jbutton1ActionPerformed //Para probar!
         BoxSelect= (String) jComboBox1.getSelectedItem();
-        
     	SpinnerValue = Integer.parseInt(jSpinner1.getValue().toString());
-        if(controller.agregarStock(getBoxSelect(),SpinnerValue)){
+        if(controller.agregarStock(controller.getModel().getIdPorNombre(getBoxSelect()),SpinnerValue)){
         	JOptionPane.showMessageDialog(null, "Se agrego: "+ getSpinnerValue() +" " + getBoxSelect());
         	setBoxs();
         }else{
         	JOptionPane.showMessageDialog(null, "Se ha producido un error en la carga del producto");
         }
-           
-        
     }
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//Para probar!
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {//Para probar!
         SpinnerValue2 = Integer.parseInt(jSpinner2.getValue().toString());
         BoxSelect2= (String) jComboBox2.getSelectedItem();
-        if(controller.quitarStock(BoxSelect2,SpinnerValue2)){
-            JOptionPane.showMessageDialog(null, "Se Quito: "+ SpinnerValue2 +" " + BoxSelect2);
-        }else{
-        	JOptionPane.showMessageDialog(null, "Se ha producido un error en la quita del producto");
+        int id=controller.getModel().getIdPorNombre(BoxSelect2);
+        if(controller.cantStock(id, SpinnerValue2)){
+        	if(controller.quitarStock(id,SpinnerValue2)){
+                JOptionPane.showMessageDialog(null, "Se Quito: "+ SpinnerValue2 +" " + BoxSelect2);
+            }else{
+            	JOptionPane.showMessageDialog(null, "Se ha producido un error en la quita del producto");
+            }
         }
+        else{
+        	JOptionPane.showMessageDialog(null, "Cantidad mayor al stock");
+        }
+        
     }
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -376,11 +400,17 @@ public class CargaStock extends javax.swing.JFrame {
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        if(controller.clearProducto(jTextField5.getText())){
-            JOptionPane.showMessageDialog(null, "Se Borro: " + jTextField5.getText()) ;
-        }else{
-        	JOptionPane.showMessageDialog(null, "Se ha producido un error en la eliminacion del producto");
-        }
+        try {
+			if(controller.clearProducto(controller.getModel().getIdPorNombre(jTextField5.getText()))){
+			    JOptionPane.showMessageDialog(null, "Se Borro: " + jTextField5.getText()) ;
+			}else{
+				JOptionPane.showMessageDialog(null, "Se ha producido un error en la eliminacion del producto");
+			}
+		} catch (HeadlessException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
     }
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,7 +418,7 @@ public class CargaStock extends javax.swing.JFrame {
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
         double f = Double.parseDouble(jTextField2.getText());
-        if(controller.addProducto(jTextField1.getText(), f , "indiferente", "prueba")){
+        if(controller.addProducto(jTextField1.getText(), f , "comida", "prueba")){
         	JOptionPane.showMessageDialog(null, "Agregado correctamente");
         }else{
         	JOptionPane.showMessageDialog(null, "Se ha producido un error al agregar el producto");
@@ -455,5 +485,10 @@ public class CargaStock extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+
+	@Override
+	public void update() {
+		this.setBoxs();
+	}
     
 }

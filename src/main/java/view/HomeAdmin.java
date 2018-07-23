@@ -115,7 +115,6 @@ public class HomeAdmin extends javax.swing.JFrame{
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
     	controller.cambiarACargaStock(this);
-    	controller.cambiarAConsultaStock(this);
     }
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//OK!

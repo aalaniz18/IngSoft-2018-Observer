@@ -79,13 +79,13 @@ public interface ControllerInterface {
 	
 	ResultSet getRSProd(String s);
 
-	boolean agregarStock(String nombre, int cant);
+	boolean agregarStock(int nombre, int cant);
 
-	boolean quitarStock(String nombre, int cant);
+	boolean quitarStock(int nombre, int cant);
 
 	boolean addProducto(String nombre, double precio, String string, String string2);
 
-	boolean clearProducto(String text);
+	boolean clearProducto(int text);
 
 	ResultSet getRSStock();
 
@@ -97,5 +97,5 @@ public interface ControllerInterface {
 
 	Compra getCompraActual();
 	
-	
+	boolean cantStock(int id, int cantidad);
 }

@@ -102,6 +102,7 @@ public class Cargador implements ModelSubject{
         cs.executeUpdate();
         System.out.println("c borro");  
         }
+    
     public int getStockProducto(int idProd) throws SQLException {
     ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=?");
     ps.setInt(1,idProd);

@@ -236,12 +236,12 @@ public class ControllerEmp implements ControllerInterface{
 	}
 	
 	@Override
-	public boolean agregarStock(String nombre, int cant) {
+	public boolean agregarStock(int nombre, int cant) {
 		return false;
 	}
 	
 	@Override
-	public boolean quitarStock(String nombre, int cant) {
+	public boolean quitarStock(int nombre, int cant) {
 		return false;
 	}
 
@@ -251,7 +251,7 @@ public class ControllerEmp implements ControllerInterface{
 	}
 	
 	@Override
-	public boolean clearProducto(String text) {
+	public boolean clearProducto(int text) {
 		return false;
 	}
 
@@ -299,7 +299,12 @@ public class ControllerEmp implements ControllerInterface{
 
 	@Override
 	public Compra getCompraActual() {
-		return model.getObjCompra();
+		return model.getObjCompraEmpleado();
+	}
+
+	@Override
+	public boolean cantStock(int id, int cantidad) {
+		return false;
 	}
 	
 }

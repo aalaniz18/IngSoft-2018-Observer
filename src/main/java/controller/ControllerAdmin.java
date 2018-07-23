@@ -3,6 +3,8 @@ package main.java.controller;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 import main.java.model.Cargador;
 import main.java.resources.Compra;
 import main.java.view.CargaStock;
@@ -93,8 +95,10 @@ public class ControllerAdmin implements ControllerInterface{
 	@Override
 	public void cambiarACargaStock(HomeAdmin h) {//OK!
 		h.setVisible(false);
-    	CargaStock cs = new CargaStock(this);
+    	CargaStock cs = new CargaStock(this,getModel());
+    	ConsultaStock cos= new ConsultaStock(this,getModel());
     	cs.setVisible(true);
+    	cos.setVisible(true);
 	}
 
 	@Override
@@ -185,9 +189,9 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 	
 	@Override
-	public boolean agregarStock(String prodNom,int cant){
+	public boolean agregarStock(int IDprodNom,int cant){
 		try {
-			model.agregarStock(prodNom,cant);
+			model.agregarStock(IDprodNom,cant);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -196,7 +200,7 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 	
 	@Override
-	public boolean quitarStock(String nombre, int cant) {
+	public boolean quitarStock(int nombre, int cant) {
 		try {
 			model.quitarStock(nombre, cant);
 			return true;
@@ -208,10 +212,8 @@ public class ControllerAdmin implements ControllerInterface{
 	
 	@Override
 	public boolean addProducto(String nombre, double precio, String string, String string2) {
-		int id;
 		try {
-			id = model.getIdProd();
-			model.creaProducto(id, nombre, precio, string, string2);
+			model.creaProducto(nombre, precio, string, string2);
 			return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -221,7 +223,7 @@ public class ControllerAdmin implements ControllerInterface{
 	}
 
 	@Override
-	public boolean clearProducto(String text) {
+	public boolean clearProducto(int text) {
 		try{
 			model.borraProducto(text);
 			return true;
@@ -254,5 +256,19 @@ public class ControllerAdmin implements ControllerInterface{
 	public Compra getCompraActual() {
 		return null;
 	}
+	
+	public boolean cantStock(int id, int cantidad){
+		int stock;
+		try {
+			stock = this.getModel().getStockProducto(id);
+			if(cantidad>stock){
+				return false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
 	
 }
