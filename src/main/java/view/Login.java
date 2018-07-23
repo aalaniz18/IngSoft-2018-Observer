@@ -231,8 +231,8 @@ public class Login extends javax.swing.JFrame {
     }
     
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        this.Pass=jPasswordField1.getText().toLowerCase();
-        this.User=jTextField1.getText().toLowerCase();
+        this.Pass=jPasswordField1.getText();
+        this.User=jTextField1.getText();
     	if(controller.esValido(User, Pass)){
                 	controller.cambiarAHome2(this);
                 }

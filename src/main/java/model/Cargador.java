@@ -69,20 +69,22 @@ public class Cargador implements ModelSubject{
 //		c.setCodigo(g.creaCode());
 //	}
 	
-    public void quitarStock (String prodNom,int cant) throws SQLException{
+    public void quitarStock (int idprod,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call RestaStock(?,?)}");
-        cs.setString("nombreProd", prodNom);
+        cs.setInt("idprod", idprod);
         cs.setInt("Cantidad", cant);
         cs.executeUpdate();
         System.out.println("c quito");
+        this.notifyObserver();
         }
     
-    public void agregarStock(String prodNom,int cant) throws SQLException{
+    public void agregarStock(int idprod,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call SumaStock(?,?)}");
-        cs.setString("nombreProd", prodNom);
+        cs.setInt("idprod", idprod);
         cs.setInt("Cantidad", cant);
         cs.executeUpdate();
         System.out.println("c agrego");
+        this.notifyObserver();
         }
         
 	public void creaUser (String user,String pass, String tipo) throws SQLException{
@@ -100,23 +102,45 @@ public class Cargador implements ModelSubject{
         cs.executeUpdate();
         System.out.println("c borro");  
         }
+    public int getStockProducto(int idProd) throws SQLException {
+    ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=?");
+    ps.setInt(1,idProd);
+    rs = ps.executeQuery();
+    int id =0;
+    while (rs.next()) {
+    	id = rs.getInt(1);
+    }
+    return id;
+    }
     
-    public void creaProducto (int prodid,String prodnom,double prodprecio,String prodtipo, String prodcoment) throws SQLException{
-        cs = cn.getConnection().prepareCall("{call CreaProducto(?,?,?,?,?)}");
-        cs.setInt("prodid", prodid);
+    public int getIdPorNombre(String nombreProd) throws SQLException {
+    	ps = cn.getConnection().prepareStatement("select ProdId from productos where ProdNom = ?");
+    	ps.setString(1,  nombreProd);
+    	rs = ps.executeQuery();
+    	int id=0;
+		while(rs.next()) {
+    		id = rs.getInt(1);
+    	}
+    	return id;
+    }
+    
+    public void creaProducto (String prodnom,double prodprecio,String prodtipo, String prodcoment) throws SQLException{
+        cs = cn.getConnection().prepareCall("{call CreaProducto(?,?,?,?)}");
         cs.setString("prodnom", prodnom);
         cs.setDouble("prodprecio", prodprecio);
         cs.setString("prodtipo", prodtipo);
         cs.setString("prodcoment", prodcoment);
         cs.executeUpdate();
                 System.out.println("c creo");
+                this.notifyObserver();
         }
     
-    public void borraProducto (String prodnom) throws SQLException{
+    public void borraProducto (int idProd) throws SQLException{
         cs = cn.getConnection().prepareCall("{call BorraProducto(?)}");
-        cs.setString("prodnom", prodnom);
+        cs.setInt("idprod", idProd);
         cs.executeUpdate();
                 System.out.println("c borro");
+                this.notifyObserver();
         }
         
     public int getIdProd() throws SQLException{
