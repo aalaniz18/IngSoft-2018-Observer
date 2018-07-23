@@ -80,6 +80,7 @@ public class Cargador implements ModelSubject{
     
     public void agregarStock(int idprod,int cant) throws SQLException{
         cs= cn.getConnection().prepareCall("{call SumaStock(?,?)}");
+        System.out.println(".."+idprod+"----"+cant);
         cs.setInt("idprod", idprod);
         cs.setInt("Cantidad", cant);
         cs.executeUpdate();
