@@ -5,17 +5,12 @@
  */
 package main.java.view;
 
-import main.java.controller.ControladorProducto;
 import main.java.controller.ControllerInterface;
 import main.java.model.Cargador;
-import main.java.model.Connect;
-import main.java.controller.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 public class CargaStock extends javax.swing.JFrame{
@@ -342,7 +337,7 @@ public class CargaStock extends javax.swing.JFrame{
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
 //    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
 //         this.BoxSelect=(String) jComboBox1.getSelectedItem();

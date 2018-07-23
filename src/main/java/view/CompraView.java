@@ -12,10 +12,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
 
-import main.java.controller.*;
 import main.java.controller.ControllerInterface;
-import main.java.model.CargaBox;
-import main.java.model.Cargador;
 import main.java.resources.Generador;
 
 public class CompraView extends javax.swing.JFrame{

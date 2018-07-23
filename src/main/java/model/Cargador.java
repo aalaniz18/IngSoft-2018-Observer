@@ -48,9 +48,9 @@ public class Cargador implements ModelSubject{
 	
 	public boolean validarEmpleado(String usua, String pass) throws SQLException{ 
 		s = cn.getConnection().createStatement();
-	    rs = s.executeQuery ("select * from usuarios where UsuTipo='e'");          
+	    rs = s.executeQuery ("select * from usuarios where UsuTipo='e'");           
 	    while (rs.next()){
-		     if (rs.getString(2).toLowerCase().trim().equalsIgnoreCase(usua)&&rs.getString(3).toLowerCase().trim().equalsIgnoreCase(pass)){
+		     if (rs.getString(2).equalsIgnoreCase(usua)&&rs.getString(3).equalsIgnoreCase(pass)){
 		    	 return true;
 		     }
 	    }          
@@ -392,6 +392,33 @@ public class Cargador implements ModelSubject{
         	cs.setString(2, formaPago);
         	cs.setString(3, codCompra);
         	cs.executeUpdate();
+                notifyObserver();
         }
+        public ResultSet getTablaObserver() throws SQLException{
+        s = cn.getConnection().createStatement();
+        rs = s.executeQuery("select codigoCompra,formaPago,horaVenta,montoVenta from comprasfinalizadas where empleado = 1");
+        return rs;
+        }
+        
+        public void renovarClave(int idUsuario, String newPass) throws SQLException{
+        cs = cn.getConnection().prepareCall("call newPass(?,?)");
+        cs.setInt("idUsuario", idUsuario);
+        cs.setString("newPass", newPass);
+        cs.executeUpdate();
+        }
+        public int getIdUsuario(String user, String pass) throws SQLException{
+        ps = cn.getConnection().prepareStatement("select idUsuarios from usuarios where UsuNombre=? and UsuClave=?");
+        ps.setString(1, user);
+        ps.setString(2, pass);
+        rs=ps.executeQuery();
+        int id=0;
+        while(rs.next()){
+        id = rs.getInt(1);
+        }
+        return id;
+        }
+      
+            
+            
 	
 }

@@ -218,7 +218,7 @@ public class Login extends javax.swing.JFrame {
         );
 
         pack();
-    }// </editor-fold>//GEN-END:initComponents
+    }// </editor-fold>                        
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
     	controller.cambiarAHome(this);
@@ -230,7 +230,7 @@ public class Login extends javax.swing.JFrame {
     private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
     }
     
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         this.Pass=jPasswordField1.getText().toLowerCase();
         this.User=jTextField1.getText().toLowerCase();
     	if(controller.esValido(User, Pass)){
@@ -254,7 +254,28 @@ public class Login extends javax.swing.JFrame {
     	}
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+            this.UserR = jTextField2.getText();
+            this.PassR = jPasswordField2.getText();
+            this.PassR2 = jPasswordField3.getText();
+                // ACA VA RENOVAR PASS
+                int id=0;
+            try {
+                id= controller.getModel().getIdUsuario(UserR, PassR);
+                System.out.println("id:"+id+ "|| user: "+ UserR + "\\ pass:"+ PassR);
+            } catch (SQLException ex) {
+                              	JOptionPane.showMessageDialog(null, "Error al ingresar credenciales");
+            }
+                if(id!=0){
+                    try {
+                        controller.getModel().renovarClave(id,PassR2);
+                        JOptionPane.showMessageDialog(null, "Renovado con exito");
+
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                              
+            }
+                else JOptionPane.showMessageDialog(null, "Error al ingresar credenciales");
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
