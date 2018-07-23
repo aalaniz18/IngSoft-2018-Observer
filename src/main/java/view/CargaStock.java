@@ -1,25 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package main.java.view;
 
 import main.java.controller.ControllerInterface;
 import main.java.model.Cargador;
+import main.java.model.ModelSubject;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 
-public class CargaStock extends javax.swing.JFrame{
+public class CargaStock extends javax.swing.JFrame {
 	
 	private String BoxSelect;
 	private String BoxSelect2;
 	private int SpinnerValue;
 	private int SpinnerValue2;
-	//ControladorProducto controlaProducto;
 	Cargador c;
 	ResultSet rs ;
     Statement s ;
@@ -29,11 +24,9 @@ public class CargaStock extends javax.swing.JFrame{
     	this.controller=controller;
         initComponents();
         setBoxs();
-        //controlaProducto = new ControladorProducto();                
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
-        this.setResizable(false);
-               
+        this.setResizable(false);   
     }
 
     private void initComponents() {
@@ -337,7 +330,7 @@ public class CargaStock extends javax.swing.JFrame{
         );
 
         pack();
-    }// </editor-fold>                        
+    }                        
 
 //    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
 //         this.BoxSelect=(String) jComboBox1.getSelectedItem();

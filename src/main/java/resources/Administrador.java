@@ -1,5 +1,7 @@
 package main.java.resources;
 
+import javax.swing.JOptionPane;
+
 public class Administrador {
 	private String usuario;
 	private String contrasena;
@@ -24,7 +26,9 @@ public class Administrador {
 		contadorInstancia++;
 		if(instancia==null){
 			crearInstancia(a,b);
-		}
+		}else{
+        	JOptionPane.showMessageDialog(null, "No puede ingresar mas de un Administrador");
+		}		
 		return instancia;
 	}
 	

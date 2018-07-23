@@ -7,13 +7,16 @@ package main.java.view;
 
 import main.java.controller.*;
 import main.java.controller.ControllerInterface;
+import main.java.model.ModelSubject;
 
-public class ConsultaStock extends javax.swing.JFrame{
+public class ConsultaStock extends javax.swing.JFrame implements ViewObserver{
 	
 	ControllerInterface controller;
+	ModelSubject model;
 	
-    public ConsultaStock(ControllerInterface controller) {
-        this.controller=controller;
+    public ConsultaStock(ControllerInterface controller, ModelSubject model) {
+        this.model=model;
+    	this.controller=controller;
     	initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
@@ -87,11 +90,17 @@ public class ConsultaStock extends javax.swing.JFrame{
         );
 
         pack();
+        model.registerObserver(this);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//OK!
     	controller.cambiarAHomeAdmin(this);
     }
+    
+	@Override
+	public void update() {
+		// actualizartabla	
+	}
 
 //    /**
 //     * @param args the command line arguments

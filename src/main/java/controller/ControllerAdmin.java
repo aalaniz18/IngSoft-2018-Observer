@@ -100,7 +100,7 @@ public class ControllerAdmin implements ControllerInterface{
 	@Override
 	public void cambiarAConsultaStock(HomeAdmin h) {//OK!
 		h.setVisible(false);
-    	ConsultaStock cs = new ConsultaStock(this);
+    	ConsultaStock cs = new ConsultaStock(this,getModel());
     	cs.setVisible(true);
 	}
 
