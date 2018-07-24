@@ -236,9 +236,8 @@ public class Recibo extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_metodoPagoActionPerformed
 
-    private void PagadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PagadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_PagadoActionPerformed
+    private void PagadoActionPerformed(java.awt.event.ActionEvent evt) {
+    }
     
     public void setText(){
     	try {
@@ -250,9 +249,7 @@ public class Recibo extends javax.swing.JFrame {
 				numeroCompra.setText(compraFinalizada.getString(1));
 				Fecha.setText(compraFinalizada.getString(4));
 				Descripcion.setText(compraFinalizada.getString(2));
-				Pagado.setText("-");
-				
-				
+				Pagado.setText("-");				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

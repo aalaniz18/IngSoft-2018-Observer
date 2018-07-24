@@ -291,5 +291,10 @@ public class ControllerCine implements ControllerInterface{
 	public boolean cantStock(int id, int cantidad) {
 		return false;
 	}
+
+	@Override
+	public int getIdProd(String nombre) {
+		return 0;
+	}
 	
 }

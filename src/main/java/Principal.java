@@ -15,11 +15,11 @@ import main.java.model.*;
 public class Principal {
 	
 	public static void main (String[] args) throws SQLException {
-		Administrador A=Administrador.getInstancia("pepito", "1234");
+		Administrador a=Administrador.getInstancia("pepito", "1234");
 		//Administrador B=Administrador.getInstancia("alvaro", "alaniz");
 		Home h= new Home();
 		Cargador c=new Cargador();
-		c.cargarAdmin(A.getUsuario(),A.getPass());
+		c.cargarAdmin(a.getUsuario(),a.getPass());
 		ControllerInterface controller = new ControllerCine(c,h);
 		h.cambiarController(controller);
 		controller.iniciar();

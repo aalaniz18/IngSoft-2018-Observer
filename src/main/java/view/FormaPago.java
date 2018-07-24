@@ -105,7 +105,7 @@ public class FormaPago extends javax.swing.JFrame{
         );
 
         pack();
-    }// </editor-fold>                        
+    }                     
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
         controller.cambiarACompra(this);
@@ -126,7 +126,6 @@ public class FormaPago extends javax.swing.JFrame{
     private void CredButonActionPerformed(java.awt.event.ActionEvent evt) {                                          
         controller.cambiarAPago(this);
         controller.getCompraActual().definirFormaPago(3);
-
     }
     
 }

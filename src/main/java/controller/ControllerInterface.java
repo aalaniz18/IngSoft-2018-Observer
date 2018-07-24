@@ -98,4 +98,6 @@ public interface ControllerInterface {
 	Compra getCompraActual();
 	
 	boolean cantStock(int id, int cantidad);
+	
+	int getIdProd(String nombre);
 }

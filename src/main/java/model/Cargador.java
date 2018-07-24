@@ -105,14 +105,14 @@ public class Cargador implements ModelSubject{
         }
     
     public int getStockProducto(int idProd) throws SQLException {
-    ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=?");
-    ps.setInt(1,idProd);
-    rs = ps.executeQuery();
-    int id =0;
-    while (rs.next()) {
-    	id = rs.getInt(1);
-    }
-    return id;
+    	ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=?");
+    	ps.setInt(1,idProd);
+    	rs = ps.executeQuery();
+    	int id =0;
+    	while (rs.next()) {
+    		id = rs.getInt(1);
+    	}
+    	return id;
     }
     
     public int getIdPorNombre(String nombreProd) throws SQLException {
@@ -133,38 +133,38 @@ public class Cargador implements ModelSubject{
         cs.setString("prodtipo", prodtipo);
         cs.setString("prodcoment", prodcoment);
         cs.executeUpdate();
-                System.out.println("c creo");
-                this.notifyObserver();
+        //System.out.println("c creo");
+        this.notifyObserver();
         }
     
     public void borraProducto (int idProd) throws SQLException{
         cs = cn.getConnection().prepareCall("{call BorraProducto(?)}");
         cs.setInt("idprod", idProd);
         cs.executeUpdate();
-                System.out.println("c borro");
-                this.notifyObserver();
-        }
+        //System.out.println("c borro");
+        this.notifyObserver();
+    }
         
     public int getIdProd() throws SQLException{
         s = cn.getConnection().createStatement();
         rs = s.executeQuery ("SELECT ProdId FROM productos ORDER BY ProdId DESC limit 1;");          
         while (rs.next()){
         	return rs.getInt(1)+1;
-        	}
-        return 0;        
         }
+        return 0;        
+    }
         
     public int getCantidad(int idProd) throws SQLException {
-        	ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=? limit 1");
-        	ps.setInt(1, idProd);
-        	rs = ps.executeQuery();
-        	int cant = 0;
-        	while (rs.next()){
-        		cant=rs.getInt(1);
-        		}
-        	return cant;
-        }
-        
+    	ps = cn.getConnection().prepareStatement("select ProdCant from productos where ProdId=? limit 1");
+    	ps.setInt(1, idProd);
+    	rs = ps.executeQuery();
+    	int cant = 0;
+    	while (rs.next()){
+    		cant=rs.getInt(1);
+		}
+    	return cant;
+    }
+             
     public void agregaItem(int idProd,String descProd,int cantidad,double prodPrecio,double precFinal, String codigoCompra) throws SQLException{
         cs = cn.getConnection().prepareCall("{call agregaItem(?,?,?,?,?,?)}");
         cs.setInt("idProd", idProd);
@@ -174,21 +174,20 @@ public class Cargador implements ModelSubject{
         cs.setDouble("precFinal", precFinal);
         cs.setString("codigoCompra", codigoCompra);
         cs.executeUpdate();
-        }
+    }
         
     public ResultSet obtenerCompra(String codigoCompra) throws SQLException{
         ps = cn.getConnection().prepareStatement("select * from compraactual where codigoCompra = ?");
         ps.setString(1, codigoCompra);
         rs = ps.executeQuery();
         return rs;
-        }
+    }
         
     public int getIdRs(ResultSet rs, String ProdNom) throws SQLException {
         while (rs.next()){
-            if (rs.getString(2).equalsIgnoreCase(ProdNom))
-            {
+        if (rs.getString(2).equalsIgnoreCase(ProdNom)){
             return rs.getInt(1);
-            }
+        	}
         }
         return 0;
     }
@@ -259,7 +258,6 @@ public class Cargador implements ModelSubject{
    }
       
    public void setOcupado(int idPelicula,int idAsiento) throws SQLException{
-       //int idAsiento= this.getIdAsiento(fila, columna);
        cs = cn.getConnection().prepareCall("call setOcupado(?,?)");
        cs.setInt("p_idPelicula",idPelicula);
        cs.setInt("p_idAsiento",idAsiento);
@@ -282,6 +280,7 @@ public class Cargador implements ModelSubject{
 	public void GuardarCompra(Compra objCompra){
 		compraCliente.add(objCompra);
 	}
+	
 	public void GuardarCompraEmpleado(Compra objCompra){
 		compraEmpleado.add(objCompra);
 	}
@@ -305,17 +304,17 @@ public class Cargador implements ModelSubject{
 			System.out.println("user:"+users.getString(2)+" || pass: "+users.getString(3));
        }
 	}
-       public void comprarEntrada(int idPelicula,String codCompra,String Fila,int Columna) throws SQLException{
+	
+   public void comprarEntrada(int idPelicula,String codCompra,String Fila,int Columna) throws SQLException{
        cs = cn.getConnection().prepareCall("call comprarPelicula(?,?,?,?)");
        cs.setInt("idPelicula", idPelicula);
        cs.setString("codCompra", codCompra);
        cs.setString("fila", Fila);
        cs.setInt("columna", Columna);
        cs.executeUpdate();
-       
-       }
+    }
         
-        public int getIdAsiento(String Fila, int Columna){
+    public int getIdAsiento(String Fila, int Columna){
         if(Fila.equalsIgnoreCase("A")) return 0*8+Columna ;
         if(Fila.equalsIgnoreCase("B")) return 1*8+Columna ;
         if(Fila.equalsIgnoreCase("C")) return 2*8+Columna ;
@@ -327,124 +326,126 @@ public class Cargador implements ModelSubject{
         if(Fila.equalsIgnoreCase("I")) return 8*8+Columna ;
         if(Fila.equalsIgnoreCase("J")) return 9*8+Columna ;
         return 0;
-        }
+    }
         
-        public boolean estaOcupado(int idPelicula,int idAsiento) throws SQLException{
-        	System.out.println(idPelicula+"---"+idAsiento);
+    public boolean estaOcupado(int idPelicula,int idAsiento) throws SQLException{
+        //	System.out.println(idPelicula+"---"+idAsiento);
         ps = cn.getConnection().prepareStatement("select ocupado from entradasPelicula where idPelicula = ? and idAsiento = ?");
         ps.setInt(1, idPelicula);
         ps.setInt(2, idAsiento);
         rs= ps.executeQuery();
         int ocupado=0;
         while(rs.next()){
-        ocupado=rs.getInt(1);
+        	ocupado=rs.getInt(1);
         }
         if (ocupado == 0)
             return false;
-                    else 
+        else 
             return true;
-        }
+    }
         
         //metodos de finalizar compra
         //&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
         
         
-        public void finalizarCompra(String codCompra) throws SQLException{
-            cs = cn.getConnection().prepareCall("call finalizarCompra(?,?,?,?)");
-            cs.setString("codCompra",codCompra);
-            cs.setString("descCompra", this.getDescVenta(codCompra));
-            cs.setDouble("totalPrecio", this.getPrecioFinal(codCompra));
-            cs.setDate("fechasys",(java.sql.Date) getFecha());
-            cs.executeUpdate();
-        }
+    public void finalizarCompra(String codCompra) throws SQLException{
+        cs = cn.getConnection().prepareCall("call finalizarCompra(?,?,?,?)");
+        cs.setString("codCompra",codCompra);
+        cs.setString("descCompra", this.getDescVenta(codCompra));
+        cs.setDouble("totalPrecio", this.getPrecioFinal(codCompra));
+        cs.setDate("fechasys",(java.sql.Date) getFecha());
+        cs.executeUpdate();
+    }
         
-        public ResultSet GenerarRecibo(String codCompra) throws SQLException{
-    		ps = cn.getConnection().prepareStatement("select * from recibos where codCompra = ?");
-    		ps.setString(1, codCompra);
-    		rs= ps.executeQuery();
-    		return rs;
-    	}
+    public ResultSet GenerarRecibo(String codCompra) throws SQLException{
+		ps = cn.getConnection().prepareStatement("select * from recibos where codCompra = ?");
+		ps.setString(1, codCompra);
+		rs= ps.executeQuery();
+		return rs;
+	}
         
-        public ResultSet getCompraFinalizada(String codCompra) throws SQLException{
-            ps = cn.getConnection().prepareStatement("select * from comprasfinalizadas where codigoCompra = ?");
-            ps.setString(1,codCompra);
-            rs = ps.executeQuery();
-            return rs;
-        }
-        public String getDescVenta(String codCompra) throws SQLException{
-			ps = cn.getConnection().prepareStatement("select descProd from compraactual where codigoCompra = ?");
-	        ps.setString(1,codCompra);
-	        rs = ps.executeQuery();
-	        String text="";
-	        while(rs.next()){
-	        	text= text + rs.getString(1);	        	
-	        }
-        	return text;
-        	}
-        
-        public double getPrecioFinal(String codCompra) throws SQLException{
-        double preciofinal=0.0;
-        ps = cn.getConnection().prepareStatement("select precFinal from compraactual where codigoCompra=?");
+    public ResultSet getCompraFinalizada(String codCompra) throws SQLException{
+        ps = cn.getConnection().prepareStatement("select * from comprasfinalizadas where codigoCompra = ?");
         ps.setString(1,codCompra);
         rs = ps.executeQuery();
+        return rs;
+    }
+    
+    public String getDescVenta(String codCompra) throws SQLException{
+		ps = cn.getConnection().prepareStatement("select descProd from compraactual where codigoCompra = ?");
+        ps.setString(1,codCompra);
+        rs = ps.executeQuery();
+        String text="";
         while(rs.next()){
-        	preciofinal = preciofinal + rs.getDouble(1)    ;    	
+        	text= text + rs.getString(1);	        	
         }
-        	return preciofinal;
-        }
+    	return text;
+	}
+    
+    public double getPrecioFinal(String codCompra) throws SQLException{
+    	double preciofinal=0.0;
+    	ps = cn.getConnection().prepareStatement("select precFinal from compraactual where codigoCompra=?");
+    	ps.setString(1,codCompra);
+    	rs = ps.executeQuery();
+    	while(rs.next()){
+    		preciofinal = preciofinal + rs.getDouble(1)    ;    	
+    	}
+    	return preciofinal;
+    }
         
-        public Date getFecha()throws SQLException{
-        	Date fec=null;
-        	s = cn.getConnection().createStatement();
-        	rs = s.executeQuery("select SYSDATE()");
-        	while(rs.next()){
-        		fec = rs.getDate(1);
-        	}
-        	return fec;
-        }
-        public Date getFechaCompra(String codCompra)throws SQLException{
-        	Date fec=null;
-        	ps = cn.getConnection().prepareStatement("select HoraVenta from comprasfinalizadas where codigoCompra = ?");
-        	ps.setString(1, codCompra);
-        	rs = ps.executeQuery();
-        	while(rs.next()){
-        		fec = rs.getDate(1);
-        	}
-        	return fec;
-        	}
-        public void setEmpleado(int empleado,String formaPago,String codCompra) throws SQLException{
-        	cs = cn.getConnection().prepareCall("call setTipoCompra(?,?,?)");
-        	cs.setInt(1, empleado);
-        	cs.setString(2, formaPago);
-        	cs.setString(3, codCompra);
-        	cs.executeUpdate();
-                notifyObserver();
-        }
-        public ResultSet getTablaObserver() throws SQLException{
+    public Date getFecha()throws SQLException{
+    	Date fec=null;
+    	s = cn.getConnection().createStatement();
+    	rs = s.executeQuery("select SYSDATE()");
+    	while(rs.next()){
+    		fec = rs.getDate(1);
+    	}
+    	return fec;
+    }
+    
+    public Date getFechaCompra(String codCompra)throws SQLException{
+    	Date fec=null;
+    	ps = cn.getConnection().prepareStatement("select HoraVenta from comprasfinalizadas where codigoCompra = ?");
+    	ps.setString(1, codCompra);
+    	rs = ps.executeQuery();
+    	while(rs.next()){
+    		fec = rs.getDate(1);
+    	}
+    	return fec;
+	}
+    
+    public void setEmpleado(int empleado,String formaPago,String codCompra) throws SQLException{
+    	cs = cn.getConnection().prepareCall("call setTipoCompra(?,?,?)");
+    	cs.setInt(1, empleado);
+    	cs.setString(2, formaPago);
+    	cs.setString(3, codCompra);
+    	cs.executeUpdate();
+            notifyObserver();
+    }
+    
+    public ResultSet getTablaObserver() throws SQLException{
         s = cn.getConnection().createStatement();
         rs = s.executeQuery("select codigoCompra,formaPago,horaVenta,montoVenta from comprasfinalizadas where empleado = 1");
         return rs;
-        }
+    }
         
-        public void renovarClave(int idUsuario, String newPass) throws SQLException{
-        cs = cn.getConnection().prepareCall("call newPass(?,?)");
-        cs.setInt("idUsuario", idUsuario);
-        cs.setString("newPass", newPass);
-        cs.executeUpdate();
-        }
-        public int getIdUsuario(String user, String pass) throws SQLException{
-        ps = cn.getConnection().prepareStatement("select idUsuarios from usuarios where UsuNombre=? and UsuClave=?");
-        ps.setString(1, user);
-        ps.setString(2, pass);
-        rs=ps.executeQuery();
-        int id=0;
-        while(rs.next()){
-        id = rs.getInt(1);
-        }
-        return id;
-        }
-      
-            
-            
-	
+    public void renovarClave(int idUsuario, String newPass) throws SQLException{
+	    cs = cn.getConnection().prepareCall("call newPass(?,?)");
+	    cs.setInt("idUsuario", idUsuario);
+	    cs.setString("newPass", newPass);
+	    cs.executeUpdate();
+    }
+    
+    public int getIdUsuario(String user, String pass) throws SQLException{
+	    ps = cn.getConnection().prepareStatement("select idUsuarios from usuarios where UsuNombre=? and UsuClave=?");
+	    ps.setString(1, user);
+	    ps.setString(2, pass);
+	    rs=ps.executeQuery();
+	    int id=0;
+	    while(rs.next()){
+	    	id = rs.getInt(1);
+	    }
+	    return id;
+    }
+    
 }

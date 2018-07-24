@@ -53,7 +53,7 @@ public class RecibirTiket extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Cargar.setText("jTextField1");
+        Cargar.setText(" ");
         Cargar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CargarActionPerformed(evt);
@@ -69,11 +69,11 @@ public class RecibirTiket extends javax.swing.JFrame {
 
         jLabel1.setText("N° COMPRA");
 
-        numeroCompra.setText("jTextField2");
+        numeroCompra.setText(" ");
 
         jLabel2.setText("FECHA:");
 
-        Fecha.setText("jTextField3");
+        Fecha.setText(" ");
         Fecha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FechaActionPerformed(evt);

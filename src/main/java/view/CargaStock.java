@@ -16,11 +16,39 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
 	private String BoxSelect2;
 	private int SpinnerValue;
 	private int SpinnerValue2;
-	Cargador c;
 	ResultSet rs ;
-    Statement s ;
     ControllerInterface controller;
     ModelSubject subject;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPasswordField jPasswordField1;
+    private javax.swing.JPasswordField jPasswordField2;
+    private javax.swing.JPasswordField jPasswordField3;
+    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
     
     public CargaStock(ControllerInterface controller, ModelSubject subject){// throws SQLException {
     	this.subject=subject;
@@ -68,12 +96,6 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-//        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jComboBox1ActionPerformed(evt);
-//            }
-//        });
-
         jSpinner1.setModel(new javax.swing.SpinnerNumberModel(1, 1, 10, 1));
 
         jButton1.setText("AGREGAR");
@@ -82,10 +104,8 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
                 try {
 					AgregarStock(evt);
 				} catch (HeadlessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -106,10 +126,8 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
                 try {
 					jButton2ActionPerformed(evt);
 				} catch (HeadlessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }
@@ -352,14 +370,10 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
         subject.registerObserver(this);
     }                        
 
-//    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {
-//         this.BoxSelect=(String) jComboBox1.getSelectedItem();
-//    }
-
-    private void AgregarStock(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {//jbutton1ActionPerformed //Para probar!
+    private void AgregarStock(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {
         BoxSelect= (String) jComboBox1.getSelectedItem();
     	SpinnerValue = Integer.parseInt(jSpinner1.getValue().toString());
-        if(controller.agregarStock(controller.getModel().getIdPorNombre(getBoxSelect()),SpinnerValue)){
+        if(controller.agregarStock(controller.getIdProd(getBoxSelect()),SpinnerValue)){
         	JOptionPane.showMessageDialog(null, "Se agrego: "+ getSpinnerValue() +" " + getBoxSelect());
         	setBoxs();
         }else{
@@ -367,13 +381,10 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
         }
     }
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {//Para probar!
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) throws HeadlessException, SQLException {
         SpinnerValue2 = Integer.parseInt(jSpinner2.getValue().toString());
         BoxSelect2= (String) jComboBox2.getSelectedItem();
-        int id=controller.getModel().getIdPorNombre(BoxSelect2);
+        int id=controller.getIdProd(BoxSelect2);
         if(controller.cantStock(id, SpinnerValue2)){
         	if(controller.quitarStock(id,SpinnerValue2)){
                 JOptionPane.showMessageDialog(null, "Se Quito: "+ SpinnerValue2 +" " + BoxSelect2);
@@ -384,36 +395,18 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
         else{
         	JOptionPane.showMessageDialog(null, "Cantidad mayor al stock");
         }
-        
-    }
-
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-    
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-			if(controller.clearProducto(controller.getModel().getIdPorNombre(jTextField5.getText()))){
-			    JOptionPane.showMessageDialog(null, "Se Borro: " + jTextField5.getText()) ;
-			}else{
-				JOptionPane.showMessageDialog(null, "Se ha producido un error en la eliminacion del producto");
-			}
+    	try {
+    		if(controller.clearProducto(controller.getIdProd(jTextField5.getText()))){
+    		    JOptionPane.showMessageDialog(null, "Se Borro: " + jTextField5.getText()) ;
+    		}else{
+    			JOptionPane.showMessageDialog(null, "Se ha producido un error en la eliminacion del producto");
+    		}			
 		} catch (HeadlessException e) {
 			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
 		}
-    }
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {
@@ -426,16 +419,14 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
         
     }
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
-    }
-
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//OK!	
     	controller.cambiarAHomeAdmin(this);
     }
    
     public String getBoxSelect(){
-    return BoxSelect;
+    	return BoxSelect;
     }
+    
     public int getSpinnerValue(){ 
     return SpinnerValue;
     }
@@ -453,42 +444,31 @@ public class CargaStock extends javax.swing.JFrame implements ViewObserver{
 			e.printStackTrace();
 		} 
     }
-    
-
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
 
 	@Override
 	public void update() {
 		this.setBoxs();
 	}
+    
+    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+
+    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
+    
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {
+    }
     
 }

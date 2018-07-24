@@ -269,6 +269,17 @@ public class ControllerAdmin implements ControllerInterface{
 		}
 		return true;
 	}
+
+	@Override
+	public int getIdProd(String nombre) {
+		int i=0;
+		try {
+			return model.getIdPorNombre(nombre);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return i;
+	}
 	
 	
 }
